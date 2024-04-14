@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import React from "react"
+import SimpleNavBar from "../components/SimpleNavBar";
 
 export default function SignInPage() {
   return (
     <PageContainer>
+      <SimpleNavBar/>
       <Title>Login</Title>
     </PageContainer>
   )
