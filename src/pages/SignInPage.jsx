@@ -7,7 +7,6 @@ export default function SignInPage() {
   return (
     <PageContainer>
       <SimpleNavBar/>
-      <Title>Login</Title>
       <SignInContainer/>
     </PageContainer>
   )
