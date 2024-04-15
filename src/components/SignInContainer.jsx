@@ -82,6 +82,7 @@ const LoginInput = styled.input`
     border: 1px solid #002D6C;
     padding-right: 30px;
     box-sizing: border-box;
+    background: #EEF5FF;
 `
 
 const Icon = styled.span`
