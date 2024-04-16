@@ -1,12 +1,13 @@
 import styled from "styled-components"
 import React from "react"
 import SimpleNavBar from "../components/SimpleNavBar";
+import SignUpContainer from "../components/SignUpContainer";
 
 export default function SignUpPage() {
     return (
       <PageContainer>
         <SimpleNavBar/>
-        <Title>registro</Title>
+        <SignUpContainer/>
       </PageContainer>
     )
   }
