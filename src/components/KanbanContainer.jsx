@@ -187,10 +187,12 @@ const DeleteContainer = styled.div`
 `
 
 const DeleteButton = styled.button`
-  position: relative;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  padding-top: 8px;
   background: none;
   border: none;
-  padding: 0;
   font: inherit;
   cursor: pointer;
   outline: inherit;
