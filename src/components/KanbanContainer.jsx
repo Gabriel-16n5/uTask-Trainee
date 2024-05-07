@@ -56,6 +56,46 @@ const Kanban = () => {
     });
   };
 
+  const handleMoveToAFazer = (id) => {
+    const movedCard = cardsAndamento.find((card) => card.id === id);
+    setCardsAndamento(cardsAndamento.filter((card) => card.id !== id));
+    setCards([...cards, movedCard]);
+  };
+  
+  const handleMoveToAndamento = (id) => {
+    const movedCard = cards.find((card) => card.id === id);
+    setCards(cards.filter((card) => card.id !== id));
+    setCardsAndamento([...cardsAndamento, movedCard]);
+  };
+  
+  const handleMoveToFeito = (id) => {
+    const movedCard = cardsAndamento.find((card) => card.id === id);
+    setCardsAndamento(cardsAndamento.filter((card) => card.id !== id));
+    setCardsFeito([...cardsFeito, movedCard]);
+  };
+
+  const handleDeleteCardFromAndamento = (id) => {
+    const updatedCards = cardsAndamento.filter((card) => card.id !== id);
+    setCardsAndamento(updatedCards);
+  };
+  
+  const handleDeleteCardFromFeito = (id) => {
+    const updatedCards = cardsFeito.filter((card) => card.id !== id);
+    setCardsFeito(updatedCards);
+  };
+
+  const handleMoveToAndamentoFromFeito = (id) => {
+    const movedCard = cardsFeito.find((card) => card.id === id);
+    setCardsFeito(cardsFeito.filter((card) => card.id !== id));
+    setCardsAndamento([...cardsAndamento, movedCard]);
+  };
+
+  const handleMoveToAFazerFromFeito = (id) => {
+    const movedCard = cardsFeito.find((card) => card.id === id);
+    setCardsFeito(cardsFeito.filter((card) => card.id !== id));
+    setCards([...cards, movedCard]);
+  };
+
   return (
     <KanbanContainer>
       <ColumnMain>
@@ -68,16 +108,19 @@ const Kanban = () => {
         <Column>
           {cards.map((card) => (
             <CardContainer key={card.id}>
-              <h5>{card.title}</h5>
-              <DescriptionContainer isExpanded={expandedCardId === card.id}>
-                {card.description}
-              </DescriptionContainer>
-              <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-              </ExpandButton>
+                <h5>{card.title}</h5>
+                <DescriptionContainer isExpanded={expandedCardId === card.id}>
+                    {card.description}
+                </DescriptionContainer>
+                <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                </ExpandButton>
                 <DeleteContainer>
+                    <ActionButtonContainer>
+                        <ActionButton onClick={() => handleMoveToAndamento(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                    </ActionButtonContainer>
                     <DeleteButton onClick={() => handleDeleteCard(card.id)}>
-                        <span className="material-icons">delete</span>
+                    <span className="material-icons">delete</span>
                     </DeleteButton>
                 </DeleteContainer>
             </CardContainer>
@@ -91,19 +134,21 @@ const Kanban = () => {
         <Column>
         {cardsAndamento.map((card) => (
             <CardContainer key={card.id}>
-              <h5>{card.title}</h5>
-              <DescriptionContainer isExpanded={expandedCardId === card.id}>
+            <h5>{card.title}</h5>
+            <DescriptionContainer isExpanded={expandedCardId === card.id}>
                 {card.description}
-              </DescriptionContainer>
-              <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+            </DescriptionContainer>
+            <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
                 {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-              </ExpandButton>
-                <DeleteContainer>
-                    <DeleteButton onClick={() => handleDeleteCard(card.id)}>
-                        <span className="material-icons">delete</span>
-                    </DeleteButton>
-                </DeleteContainer>
-            </CardContainer>
+            </ExpandButton>
+            <DeleteContainer>
+                    <ActionButtonContainer>
+                        <ActionButton onClick={() => handleMoveToAFazer(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                        <ActionButton onClick={() => handleMoveToFeito(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                    </ActionButtonContainer>
+                    <DeleteButton onClick={() => handleDeleteCardFromAndamento(card.id)}><span className="material-icons">delete</span></DeleteButton>
+            </DeleteContainer>
+        </CardContainer>
           ))}
         </Column>
       </ColumnMain>
@@ -114,18 +159,20 @@ const Kanban = () => {
         <Column>
         {cardsFeito.map((card) => (
             <CardContainer key={card.id}>
-              <h5>{card.title}</h5>
-              <DescriptionContainer isExpanded={expandedCardId === card.id}>
-                {card.description}
-              </DescriptionContainer>
-              <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-              </ExpandButton>
+                <h5>{card.title}</h5>
+                <DescriptionContainer isExpanded={expandedCardId === card.id}>
+                    {card.description}
+                </DescriptionContainer>
+                <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                </ExpandButton>
                 <DeleteContainer>
-                    <DeleteButton onClick={() => handleDeleteCard(card.id)}>
-                        <span className="material-icons">delete</span>
-                    </DeleteButton>
-                </DeleteContainer>
+                    <ActionButtonContainer>
+                        <ActionButton onClick={() => handleMoveToAndamentoFromFeito(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                        <ActionButton onClick={() => handleMoveToAFazerFromFeito(card.id)}><span class="material-icons">replay</span></ActionButton>
+                    </ActionButtonContainer>
+                    <DeleteButton onClick={() => handleDeleteCardFromFeito(card.id)}><span className="material-icons">delete</span></DeleteButton>
+            </DeleteContainer>
             </CardContainer>
           ))}
         </Column>
@@ -206,7 +253,7 @@ const ColumnTitle = styled.h2`
 const CardContainer = styled.div`
   width: 350px;
   height: auto;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 20px;
   margin-bottom: 5px;
@@ -263,5 +310,21 @@ const ExpandButton = styled.button`
   text-align: left;
   margin-top: 10px;
 `;
+
+const ActionButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+`;
+
+const ActionButton = styled.button`
+  background-color: #ffffff;
+  color: #226ed8;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+`;
+
 
 export default Kanban;
