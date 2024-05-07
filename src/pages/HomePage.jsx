@@ -1,10 +1,14 @@
 import styled from "styled-components"
 import React from "react"
+import MainNavBar from "../components/MainNavBar";
+import FooterBar from "../components/Footer";
 
 export default function HomePage() {
     return (
       <PageContainer>
+        <MainNavBar/>
         <Title>Home</Title>
+        <FooterBar/>
       </PageContainer>
     )
   }
