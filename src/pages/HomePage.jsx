@@ -3,6 +3,7 @@ import React from "react"
 import MainNavBar from "../components/MainNavBar";
 import FooterBar from "../components/Footer";
 import icon from "../assets/Icone.png"
+import Kanban from "../components/KanbanContainer"
 
 export default function HomePage() {
     return (
@@ -16,6 +17,7 @@ export default function HomePage() {
                   <FraseDoDia>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</FraseDoDia>
               </FraseDoDiaContent>
           </FraseDoDiaContainer>
+          <Kanban/>
           </PageContainer>
         <FooterBar/>
       </>
