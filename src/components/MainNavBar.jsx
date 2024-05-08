@@ -51,8 +51,12 @@ const MainNav = styled.div`
         height: 40px;
         top: 20px;
         left: 160px;
-        gap: 0px;
-        opacity: 0px;
+        @media screen and (max-width: 480px){
+            width: 20px;
+            height: 30px;
+            top: 10px;
+            left: 160px;
+}
     }
 `
 
@@ -63,6 +67,11 @@ const Title = styled.h1`
     font-weight: 700;
     line-height: 63px;
     text-align: center;
+    width: 45vw;
+    height: auto;
+    @media screen and (max-width: 480px){
+        font-size:30px;
+}
 `
 
 const Button = styled.div`

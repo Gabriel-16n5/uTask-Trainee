@@ -9,6 +9,10 @@ export default function HomePage() {
     return (
           <PageContainer>
             <MainNavBar/>
+            <FraseDoDiaContainerMobile>
+              <Icon><img src={icon} alt="icon"></img></Icon>
+              <FraseDoDiaTitleMobile>Frase do dia</FraseDoDiaTitleMobile>
+            </FraseDoDiaContainerMobile>
             <FraseDoDiaContainer>
               <Icon><img src={icon} alt="icon"></img></Icon>
               <FraseDoDiaContent>
@@ -38,6 +42,15 @@ export default function HomePage() {
     text-align: left;
   `;
 
+const FraseDoDiaTitleMobile = styled.h4`
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: left;
+    color: #FFFFFF;
+`;
+
   const FraseDoDia = styled.p`
       font-family: Poppins;
       font-size: 19px;
@@ -57,6 +70,28 @@ export default function HomePage() {
   margin-bottom:20px;
   height:15vh;
   margin-top:12vh;
+  @media screen and (max-width: 1279px), (max-height: 719px) {
+        display:none;
+}
+`;
+
+  const FraseDoDiaContainerMobile = styled.div`
+    background-color: #FFD569;
+    display: flex;
+    justify-content:start;
+    align-items:center;
+    padding: 20px;
+    border-radius: 5px;
+    width: 70vw;
+    max-width: 600px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 2px 2px 10px 2px #0000000A;
+    margin-bottom:20px;
+    height:5vh;
+    margin-top:12vh;
+    @media screen and (max-width: 1279px), (max-height: 719px) {
+          display:show;
+}
 `;
 
   const FraseDoDiaContent = styled.div`
