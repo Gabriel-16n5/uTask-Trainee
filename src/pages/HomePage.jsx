@@ -43,7 +43,6 @@ export default function HomePage() {
   `;
 
   const FraseDoDia = styled.p`
-      width: auto;
       font-family: Poppins;
       font-size: 20px;
       font-weight: 400;
@@ -55,16 +54,12 @@ export default function HomePage() {
   const FraseDoDiaContainer = styled.div`
   background-color: #FFFFFF;
   display: flex;
-  padding: 10px;
+  margin-top: 10rem;
+  padding: 20px;
   border-radius: 5px;
   max-width: 920px;
-  width: auto;
-  height: auto;
-  top: 112px;
-  left: 160px;
-  gap: 0px;
   border-radius: 20px 20px 20px 20px;
-  opacity: 0px;
+  box-shadow: 2px 2px 10px 2px #0000000A;
 `;
 
   const FraseDoDiaContent = styled.div`
@@ -81,10 +76,8 @@ export default function HomePage() {
       font-size: 24px;
       text-align: center;
       background-color:#fafafa;
-      margin-top: 30px;
-      padding-top: 70px;
       padding-left: 10vw;
-      height: 88vh; // arrumar isso aqui
+      min-height: calc(100vh - 52px);
   `
   
   const Title = styled.h1`
