@@ -33,7 +33,7 @@ const Kanban = () => {
 
   const openAddCardModal = () => {
     Swal.fire({
-      title: 'Nova Task',
+      title: '<span style="color: #3867D6">Nova Task</span>',
       html: `
         <input id="swal-input1" class="swal2-input" placeholder="Título">
         <input id="swal-input2" class="swal2-input" placeholder="Descrição">
