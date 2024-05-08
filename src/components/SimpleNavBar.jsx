@@ -15,4 +15,7 @@ const SimpleNav = styled.div`
     left: 0;
     z-index: 1000;
     box-shadow: 0px 0px 15px 2px #000;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        position: relative;
+}
 `

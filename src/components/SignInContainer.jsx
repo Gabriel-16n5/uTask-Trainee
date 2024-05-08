@@ -73,10 +73,13 @@ const PasswordField = styled.div`
     display:flex;
     flex-direction: column;
     position: relative;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        width:90vw;
+}
 `
 
 const LoginInput = styled.input`
-    width: 30rem;
+    width: 25vw;
     height: 3rem;
     border-radius: 8px;
     border: 1px solid #002D6C;
@@ -86,6 +89,9 @@ const LoginInput = styled.input`
     font-size:18px;
     padding-left: 10px;
     margin-bottom: 20px;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        width:90vw;
+}
 `
 
 const Icon = styled.span`
@@ -97,24 +103,29 @@ const Icon = styled.span`
 `
 
 const HorizontalSeparator = styled.div`
-    margin-top:40px;
-    margin-bottom:40px;
-    width: 15rem;
-    height: 1.1px;
-    background-color: #3B5F91;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 14vw;
+    height: 2px; 
+    background-color: #3b5f91;
+    position: relative;
 `;
+
 
 const VerticalSeparator = styled.div`
     width: 4px;
-    height: 60rem;
+    height: 80vh;
     background-color: #9CC7FBB2;
     margin-left: 5rem;
     margin-right: 5rem;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        display:none;
+}
 `;
 
 const LoginButton = styled.button`
     margin-top:25px;
-    width: 30rem;
+    width: 25vw;
     height: 3.5rem;
     border-radius: 20px;
     opacity: 0px;
@@ -125,6 +136,9 @@ const LoginButton = styled.button`
     line-height: 24px;
     text-align: center;
     color: #FFFFFF;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        width:90vw;
+}
 `
 
 const CustomLink = styled(Link)`
@@ -139,7 +153,7 @@ const CustomLink = styled(Link)`
 
 const RegisterLink = styled(Link)`
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 21px;
     text-align: left;
@@ -159,29 +173,44 @@ const SingInContainer = styled.section`
         text-align: left;
         margin-bottom:5px;
     }
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+    }
 `
 
 const LoginContainer = styled.div`
-    height: 40rem;
-    width: 40rem;
+    height: auto;
+    width: 30vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        height:100%;
+        width: 90vw;
+}
 `
 
 const ImgLogin = styled.img`
-    width: 55rem;
+    width: 45vw;
     height: auto;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        display:none;
+}
 `
 
 const PageContainer = styled.div`
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-`
+
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+}
+`;
 
 const Title = styled.h1`
     color: #226ED8;
@@ -190,5 +219,9 @@ const Title = styled.h1`
     font-weight: 700;
     line-height: 63px;
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 5vh;
+    @media screen and (max-width: 1023px), (max-height: 599px) {
+        font-size: 42px;
+        margin-top: 5vh;
+}
 `
