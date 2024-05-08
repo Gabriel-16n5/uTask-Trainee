@@ -4,6 +4,7 @@ import MainNavBar from "../components/MainNavBar";
 import FooterBar from "../components/Footer";
 import icon from "../assets/Icone.png"
 import Kanban from "../components/KanbanContainer"
+import KanbanMobile from "../components/KanbanContainerMobile"
 
 export default function HomePage() {
     return (
@@ -21,6 +22,7 @@ export default function HomePage() {
               </FraseDoDiaContent>
             </FraseDoDiaContainer>
             <Kanban/>
+            <KanbanMobile/>
             <FooterBar/>
           </PageContainer>
     )
@@ -82,16 +84,12 @@ const FraseDoDiaTitleMobile = styled.h4`
     align-items:center;
     padding: 20px;
     border-radius: 5px;
-    width: 70vw;
-    max-width: 600px;
+    width: 80vw;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 2px 2px 10px 2px #0000000A;
     margin-bottom:20px;
     height:5vh;
     margin-top:12vh;
-    @media screen and (max-width: 1279px), (max-height: 719px) {
-          display:show;
-}
 `;
 
   const FraseDoDiaContent = styled.div`

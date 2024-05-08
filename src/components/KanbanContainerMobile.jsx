@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
-const Kanban = () => {
+const KanbanMobile = () => {
   const [cards, setCards] = useState([]);
   const [cardsAndamento, setCardsAndamento] = useState([]);
   const [cardsFeito, setCardsFeito] = useState([]);
-
   const [newCardText, setNewCardText] = useState('');
-
   const [expandedCardId, setExpandedCardId] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, 2));
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
+  };
 
   const handleExpandCard = (id) => {
     setExpandedCardId(id === expandedCardId ? null : id);
@@ -98,85 +105,93 @@ const Kanban = () => {
 
   return (
     <KanbanContainer>
-      <ColumnMain>
-        <ColumnHeader>
-          <ColumnTitle>A Fazer</ColumnTitle>
-          <PlusButton onClick={openAddCardModal}>
-            <span className="material-icons">control_point</span>
-          </PlusButton>
-        </ColumnHeader>
-        <Column>
-          {cards.map((card) => (
-            <CardContainer key={card.id}>
-                <h5>{card.title}</h5>
-                <DescriptionContainer isExpanded={expandedCardId === card.id}>
-                    {card.description}
-                </DescriptionContainer>
-                <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-                </ExpandButton>
-                <DeleteContainer>
-                    <ActionButtonContainer>
-                        <ActionButton onClick={() => handleMoveToAndamento(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
-                    </ActionButtonContainer>
-                    <DeleteButton onClick={() => handleDeleteCard(card.id)}>
-                    <span className="material-icons">delete</span>
-                    </DeleteButton>
-                </DeleteContainer>
-            </CardContainer>
-          ))}
-        </Column>
-      </ColumnMain>
-      <ColumnMain>
-        <ColumnHeader>
-            <ColumnTitle>Em andamento</ColumnTitle>
-        </ColumnHeader>
-        <Column>
-        {cardsAndamento.map((card) => (
-            <CardContainer key={card.id}>
-            <h5>{card.title}</h5>
-            <DescriptionContainer isExpanded={expandedCardId === card.id}>
-                {card.description}
-            </DescriptionContainer>
-            <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-            </ExpandButton>
-            <DeleteContainer>
-                    <ActionButtonContainer>
-                        <ActionButton onClick={() => handleMoveToAFazer(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
-                        <ActionButton onClick={() => handleMoveToFeito(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
-                    </ActionButtonContainer>
-                    <DeleteButton onClick={() => handleDeleteCardFromAndamento(card.id)}><span className="material-icons">delete</span></DeleteButton>
-            </DeleteContainer>
-        </CardContainer>
-          ))}
-        </Column>
-      </ColumnMain>
-      <ColumnMain>
-        <ColumnHeader>
-            <ColumnTitle>Feito</ColumnTitle>
-        </ColumnHeader>
-        <Column>
-        {cardsFeito.map((card) => (
-            <CardContainer key={card.id}>
-                <h5>{card.title}</h5>
-                <DescriptionContainer isExpanded={expandedCardId === card.id}>
-                    {card.description}
-                </DescriptionContainer>
-                <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-                </ExpandButton>
-                <DeleteContainer>
-                    <ActionButtonContainer>
-                        <ActionButton onClick={() => handleMoveToAndamentoFromFeito(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
-                        <ActionButton onClick={() => handleMoveToAFazerFromFeito(card.id)}><span class="material-icons">replay</span></ActionButton>
-                    </ActionButtonContainer>
-                    <DeleteButton onClick={() => handleDeleteCardFromFeito(card.id)}><span className="material-icons">delete</span></DeleteButton>
-            </DeleteContainer>
-            </CardContainer>
-          ))}
-        </Column>
-      </ColumnMain>
+      <SliderContainer>
+        <SliderWrapper style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+        <ColumnMain>
+          <ColumnHeader>
+            <ColumnTitle>A Fazer</ColumnTitle>
+            <PlusButton onClick={openAddCardModal}>
+              <span className="material-icons">control_point</span>
+            </PlusButton>
+          </ColumnHeader>
+          <Column>
+            {cards.map((card) => (
+              <CardContainer key={card.id}>
+                  <h5>{card.title}</h5>
+                  <DescriptionContainer isExpanded={expandedCardId === card.id}>
+                      {card.description}
+                  </DescriptionContainer>
+                  <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+                      {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                  </ExpandButton>
+                  <DeleteContainer>
+                      <ActionButtonContainer>
+                          <ActionButton onClick={() => handleMoveToAndamento(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                      </ActionButtonContainer>
+                      <DeleteButton onClick={() => handleDeleteCard(card.id)}>
+                      <span className="material-icons">delete</span>
+                      </DeleteButton>
+                  </DeleteContainer>
+              </CardContainer>
+            ))}
+          </Column>
+        </ColumnMain>
+        <ColumnMain>
+          <ColumnHeader>
+              <ColumnTitle>Em andamento</ColumnTitle>
+          </ColumnHeader>
+          <Column>
+          {cardsAndamento.map((card) => (
+              <CardContainer key={card.id}>
+              <h5>{card.title}</h5>
+              <DescriptionContainer isExpanded={expandedCardId === card.id}>
+                  {card.description}
+              </DescriptionContainer>
+              <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+                  {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+              </ExpandButton>
+              <DeleteContainer>
+                      <ActionButtonContainer>
+                          <ActionButton onClick={() => handleMoveToAFazer(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                          <ActionButton onClick={() => handleMoveToFeito(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                      </ActionButtonContainer>
+                      <DeleteButton onClick={() => handleDeleteCardFromAndamento(card.id)}><span className="material-icons">delete</span></DeleteButton>
+              </DeleteContainer>
+          </CardContainer>
+            ))}
+          </Column>
+        </ColumnMain>
+        <ColumnMain>
+          <ColumnHeader>
+              <ColumnTitle>Feito</ColumnTitle>
+          </ColumnHeader>
+          <Column>
+          {cardsFeito.map((card) => (
+              <CardContainer key={card.id}>
+                  <h5>{card.title}</h5>
+                  <DescriptionContainer isExpanded={expandedCardId === card.id}>
+                      {card.description}
+                  </DescriptionContainer>
+                  <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
+                      {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                  </ExpandButton>
+                  <DeleteContainer>
+                      <ActionButtonContainer>
+                          <ActionButton onClick={() => handleMoveToAndamentoFromFeito(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                          <ActionButton onClick={() => handleMoveToAFazerFromFeito(card.id)}><span class="material-icons">replay</span></ActionButton>
+                      </ActionButtonContainer>
+                      <DeleteButton onClick={() => handleDeleteCardFromFeito(card.id)}><span className="material-icons">delete</span></DeleteButton>
+              </DeleteContainer>
+              </CardContainer>
+            ))}
+          </Column>
+        </ColumnMain>
+        </SliderWrapper>
+      </SliderContainer>
+      <Controls>
+        <Button onClick={handlePrevSlide}>Anterior</Button>
+        <Button onClick={handleNextSlide}>Próximo</Button>
+      </Controls>
     </KanbanContainer>
   );
 };
@@ -229,10 +244,22 @@ const KanbanContainer = styled.div`
     align-items: center;
     width: 100vw;
     height: 100vh;
+    display: none;
     @media screen and (max-width: 1280px){
-        display:none;
+        display: flex;
+        flex-direction:column;
     }
 `;
+
+const SliderWrapper = styled.div`
+  display: flex;
+  transition: transform 0.5s ease;
+`;
+
+const SliderContainer = styled.div`
+  overflow: hidden;
+  width: 80vw;
+`
 
 const ColumnMain = styled.div`
   display: flex;
@@ -241,7 +268,7 @@ const ColumnMain = styled.div`
   margin-right: 3rem;
   margin-bottom: 3rem;
   height:50vh;
-  
+  flex: 0 0 100%;
 `;
 
 const Column = styled.div`
@@ -342,5 +369,20 @@ const ActionButton = styled.button`
   font-size: 14px;
 `;
 
+const Controls = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
 
-export default Kanban;
+const Button = styled.button`
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+export default KanbanMobile;
