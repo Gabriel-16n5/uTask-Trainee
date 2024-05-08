@@ -224,23 +224,27 @@ const ColumnHeader = styled.div`
 `;
 
 const KanbanContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 `;
 
 const ColumnMain = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 400px;
+  min-width: 300px;
   margin-right: 3rem;
   margin-bottom: 3rem;
+  height:50vh;
+  
 `;
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 400px;
+  min-width: 300px;
   height: 600px;
   background-color: #eeeeee; 
   border-radius: 20px 20px 20px 20px;
@@ -251,11 +255,16 @@ const Column = styled.div`
 `;
 
 const ColumnTitle = styled.h2`
-  text-align: center;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  color: #141414;
 `;
 
 const CardContainer = styled.div`
-  width: 350px;
+  width: 85%;
   height: auto;
   background-color: #ffffff;
   padding: 10px;

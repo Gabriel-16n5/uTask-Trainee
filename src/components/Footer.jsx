@@ -15,7 +15,7 @@ const Footer = styled.div`
     align-items: center;
     background-color:#114FA7;
     width: 100%;
-    height: 52px;
+    min-height: 50px;
     bottom: 0;
     left: 0;
     z-index: 1000;
