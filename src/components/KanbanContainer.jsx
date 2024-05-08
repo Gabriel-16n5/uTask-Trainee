@@ -241,13 +241,13 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 400px;
-  width: 400px;
-  min-height: 400px;
+  height: 600px;
   background-color: #eeeeee; 
-  gap: 0px;
   border-radius: 20px 20px 20px 20px;
-  opacity: 0px;
   align-items: center;
+  padding-bottom: .3rem;
+  overflow-y: auto;
+  max-height: 600px;
 `;
 
 const ColumnTitle = styled.h2`
