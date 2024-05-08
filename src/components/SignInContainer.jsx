@@ -25,6 +25,7 @@ export default function SignInContainer() {
     return (
         <PageContainer>
             <ImgLogin src={ImagemLogin} alt="imagem de login" />
+            <VerticalSeparator/>
             <LoginContainer>
                 <Title>uTask 3.0</Title>
                 <SingInContainer>
@@ -75,14 +76,16 @@ const PasswordField = styled.div`
 `
 
 const LoginInput = styled.input`
-    width: 374px;
-    height: 40px;
-    gap: 0px;
+    width: 30rem;
+    height: 3rem;
     border-radius: 8px;
     border: 1px solid #002D6C;
     padding-right: 30px;
     box-sizing: border-box;
     background: #EEF5FF;
+    font-size:18px;
+    padding-left: 10px;
+    margin-bottom: 20px;
 `
 
 const Icon = styled.span`
@@ -94,20 +97,25 @@ const Icon = styled.span`
 `
 
 const HorizontalSeparator = styled.div`
-    margin-top:30px;
-    margin-bottom:30px;
-    width: 170px;
-    height: 2px;
+    margin-top:40px;
+    margin-bottom:40px;
+    width: 15rem;
+    height: 1.1px;
     background-color: #3B5F91;
+`;
+
+const VerticalSeparator = styled.div`
+    width: 4px;
+    height: 60rem;
+    background-color: #9CC7FBB2;
+    margin-left: 5rem;
+    margin-right: 5rem;
 `;
 
 const LoginButton = styled.button`
     margin-top:25px;
-    width: 374px;
-    height: 45px;
-    top: 414px;
-    left: 774px;
-    gap: 0px;
+    width: 30rem;
+    height: 3.5rem;
     border-radius: 20px;
     opacity: 0px;
     background: #226ED8;
@@ -121,16 +129,17 @@ const LoginButton = styled.button`
 
 const CustomLink = styled(Link)`
     font-family: Poppins;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 15px;
     text-align: left;
     color: #226ED8;
+    margin-top:-15px;
 `
 
 const RegisterLink = styled(Link)`
     font-family: Poppins;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 21px;
     text-align: left;
@@ -138,22 +147,23 @@ const RegisterLink = styled(Link)`
 `
 
 const SingInContainer = styled.section`
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     p{
         font-family: Poppins;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 400;
         line-height: 24px;
         text-align: left;
+        margin-bottom:5px;
     }
 `
 
 const LoginContainer = styled.div`
-    height: 100vh;
+    height: 40rem;
+    width: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -161,21 +171,24 @@ const LoginContainer = styled.div`
 `
 
 const ImgLogin = styled.img`
-    width: 40vw;
+    width: 55rem;
     height: auto;
 `
 
 const PageContainer = styled.div`
     display: flex;
-    justify-content:space-around;
+    justify-content:center;
+    align-items: center;
     width: 100vw;
+    height: 100vh;
 `
 
 const Title = styled.h1`
     color: #226ED8;
     font-family: Poppins, sans-serif;
-    font-size: 42px;
+    font-size: 62px;
     font-weight: 700;
     line-height: 63px;
     text-align: center;
+    margin-bottom: 5rem;
 `

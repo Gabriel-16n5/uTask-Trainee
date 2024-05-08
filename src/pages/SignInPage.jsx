@@ -20,11 +20,4 @@ const PageContainer = styled.div`
     font-size: 24px;
     text-align: center;
     color: #293845;
-    margin-top: 30px;
-    padding-top: 70px;
 `
-
-const Title = styled.h1`
-  font-size: 24px;
-  margin-bottom: 16px;
-`;
