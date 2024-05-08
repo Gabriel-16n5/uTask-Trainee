@@ -220,19 +220,21 @@ const ColumnHeader = styled.div`
   display: flex;
   justify-content: space-between;
   min-height: 40px;
+  margin-bottom: .5rem;
 `;
 
 const KanbanContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 4rem;
 `;
 
 const ColumnMain = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 400px;
-  margin-right: 50px;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
 `;
 
 const Column = styled.div`
