@@ -173,8 +173,6 @@ const SingInContainer = styled.section`
         text-align: left;
         margin-bottom:5px;
     }
-    @media screen and (max-width: 1023px), (max-height: 599px) {
-    }
 `
 
 const LoginContainer = styled.div`
@@ -204,11 +202,10 @@ const PageContainer = styled.div`
     align-items: center;
     width: 100vw;
     height: 100vh;
-
     @media screen and (max-width: 1023px), (max-height: 599px) {
-    flex-direction: column;
-    width: auto;
-    height: auto;
+        flex-direction: column;
+        width: auto;
+        height: auto;
 }
 `;
 

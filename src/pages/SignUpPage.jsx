@@ -20,12 +20,8 @@ export default function SignUpPage() {
       font-size: 24px;
       text-align: center;
       color: #293845;
-      margin-top: 30px;
-      padding-top: 70px;
-  `
-  
-  const Title = styled.h1`
-    font-size: 24px;
-    margin-bottom: 16px;
-  `;
-  
+      @media screen and (max-width: 1023px), (max-height: 799px) {
+        width: 100%;
+        height:100%;
+}
+  `  

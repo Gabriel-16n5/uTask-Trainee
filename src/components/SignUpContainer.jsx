@@ -108,10 +108,13 @@ const PasswordField = styled.div`
     display:flex;
     flex-direction: column;
     position: relative;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        width:90vw;
+}
 `
 
 const RegisterInput = styled.input`
-    width: 30rem;
+    width: 25vw;
     height: 3rem;
     border-radius: 8px;
     border: 1px solid #002D6C;
@@ -121,6 +124,9 @@ const RegisterInput = styled.input`
     font-size:18px;
     padding-left: 10px;
     margin-bottom: 20px;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        width:90vw;
+}
 `
 
 const Icon = styled.span`
@@ -143,15 +149,18 @@ const HorizontalSeparator = styled.div`
 
 const VerticalSeparator = styled.div`
     width: 4px;
-    height: 60rem;
+    height: 80vh;
     background-color: #9CC7FBB2;
     margin-left: 5rem;
     margin-right: 5rem;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        display:none;
+}
 `;
 
 const RegisterButton = styled.button`
     margin-top:25px;
-    width: 30rem;
+    width: 25vw;
     height: 3.5rem;
     border-radius: 20px;
     opacity: 0px;
@@ -162,6 +171,9 @@ const RegisterButton = styled.button`
     line-height: 24px;
     text-align: center;
     color: #FFFFFF;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        width:90vw;
+}
 `
 
 const RegisterContent = styled.section`
@@ -178,17 +190,24 @@ const RegisterContent = styled.section`
 `
 
 const RegisterContainer = styled.div`
-    height: 40rem;
-    width: 40rem;
+    height: auto;
+    width: 30vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        height:100%;
+        width: 90vw;
+}
 `
 
 const ImgRegister = styled.img`
-    width: 55rem;
+    width: 45vw;
     height: auto;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        display:none;
+}
 `
 
 const PageContainer = styled.div`
@@ -197,6 +216,13 @@ const PageContainer = styled.div`
     align-items: center;
     width: auto;
     height: auto;
+    width: 100vw;
+    height: 100vh;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        flex-direction: column;
+        width: auto;
+        height: auto;
+}
 `
 
 const Title = styled.h1`
@@ -206,7 +232,11 @@ const Title = styled.h1`
     font-weight: 700;
     line-height: 63px;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 5vh;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        font-size: 42px;
+        margin-top: 5vh;
+}
 `
 
 const SubTitle = styled.h2`
@@ -217,6 +247,9 @@ const SubTitle = styled.h2`
     text-align: left;
     color: #00122A;
     margin-bottom: 15px;
+    @media screen and (max-width: 1023px), (max-height: 799px) {
+        font-size: 16px;
+}
 `
 
 const PasswordMismatchMessage = styled.h3`
