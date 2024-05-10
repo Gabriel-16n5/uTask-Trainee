@@ -1,29 +1,41 @@
 import styled from "styled-components"
-import React from "react"
+import React, { useState, useEffect } from 'react';
 import MainNavBar from "../components/MainNavBar";
 import FooterBar from "../components/Footer";
-import icon from "../assets/Icone.png"
+import icon from "../assets/Icone.png";
+import iconDark from "../assets/IconeDark.png"
 import Kanban from "../components/KanbanContainer"
 import KanbanMobile from "../components/KanbanContainerMobile"
 
 export default function HomePage() {
+    const [darkMode, setDarkMode] = useState(false);
+
+      useEffect(() => {
+        // if(cityForSearch === ""){
+        // fetchGeoLocalization()
+        // }
+        // fetchWeatherInfo()
+        // fetchForeCastInfo()
+        
+      }, [darkMode])
+
     return (
-          <PageContainer>
-            <MainNavBar/>
-            <FraseDoDiaContainerMobile>
-              <Icon><img src={icon} alt="icon"></img></Icon>
-              <FraseDoDiaTitleMobile>Frase do dia</FraseDoDiaTitleMobile>
+          <PageContainer darkMode={darkMode}>
+            <MainNavBar setDarkMode={setDarkMode} />
+            <FraseDoDiaContainerMobile darkMode={darkMode}>
+              <Icon darkMode={darkMode}>{darkMode ? <img src={iconDark} alt="icon"></img> : <img src={icon} alt="icon"></img>}</Icon>
+              <FraseDoDiaTitleMobile darkMode={darkMode}>Frase do dia</FraseDoDiaTitleMobile>
             </FraseDoDiaContainerMobile>
-            <FraseDoDiaContainer>
-              <Icon><img src={icon} alt="icon"></img></Icon>
+            <FraseDoDiaContainer darkMode={darkMode}>
+              <Icon darkMode={darkMode}>{darkMode ? <img src={iconDark} alt="icon"></img> : <img src={icon} alt="icon"></img>}</Icon>
               <FraseDoDiaContent>
-                  <FraseDoDiaTitle>Frase do dia</FraseDoDiaTitle>
-                  <FraseDoDia>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</FraseDoDia>
+                  <FraseDoDiaTitle darkMode={darkMode}>Frase do dia</FraseDoDiaTitle>
+                  <FraseDoDia darkMode={darkMode}>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</FraseDoDia>
               </FraseDoDiaContent>
             </FraseDoDiaContainer>
-            <Kanban/>
-            <KanbanMobile/>
-            <FooterBar/>
+            <Kanban darkMode={darkMode}/>
+            <KanbanMobile darkMode={darkMode}/>
+            <FooterBar darkMode={darkMode}/>
           </PageContainer>
     )
   }
@@ -42,6 +54,7 @@ export default function HomePage() {
     font-weight: 700;
     line-height: 18px;
     text-align: left;
+    color: ${(props) => (props.darkMode ? "#FAFAFA" : "")};
   `;
 
 const FraseDoDiaTitleMobile = styled.h4`
@@ -50,7 +63,7 @@ const FraseDoDiaTitleMobile = styled.h4`
     font-weight: 700;
     line-height: 18px;
     text-align: left;
-    color: #FFFFFF;
+    color: ${(props) => (props.darkModeVerify ? "#3867d6" : "#FAFAFA")};
 `;
 
   const FraseDoDia = styled.p`
@@ -59,10 +72,10 @@ const FraseDoDiaTitleMobile = styled.h4`
       font-weight: 400;
       line-height: 1.5;
       text-align: start;
+      color: ${(props) => (props.darkMode ? "#FAFAFA" : "")};
   `;
 
   const FraseDoDiaContainer = styled.div`
-  background-color: #FFFFFF;
   display: flex;
   padding: 20px;
   border-radius: 5px;
@@ -72,13 +85,14 @@ const FraseDoDiaTitleMobile = styled.h4`
   margin-bottom:20px;
   height:15vh;
   margin-top:12vh;
+  background-color: ${(props) => (props.darkMode ? "#3d3d3d" : "#FFFFFF")};
   @media screen and (max-width: 1279px), (max-height: 719px) {
         display:none;
 }
 `;
 
   const FraseDoDiaContainerMobile = styled.div`
-    background-color: #FFD569;
+    background-color: ${(props) => (props.darkMode ? "#3d3d3d" : "#FFD569")};
     display: flex;
     justify-content:start;
     align-items:center;
@@ -90,6 +104,10 @@ const FraseDoDiaTitleMobile = styled.h4`
     margin-bottom:20px;
     height:5vh;
     margin-top:12vh;
+    display: none;
+    @media screen and (max-width: 1280px){
+      display:flex;
+    }
 `;
 
   const FraseDoDiaContent = styled.div`
@@ -104,4 +122,5 @@ const FraseDoDiaTitleMobile = styled.h4`
       justify-content: center;
       height:100vh;
       width:100vw;
+      background-color: ${(props) => (props.darkMode ? "#222222" : "")};
   `

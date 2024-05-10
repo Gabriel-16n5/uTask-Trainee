@@ -1,8 +1,9 @@
 import styled from "styled-components"
 
-export default function FooterBar() {
+export default function FooterBar(props) {
+    const { darkMode } = props;
     return (
-        <Footer>
+        <Footer darkMode={darkMode}>
             <p>© Processo de Trainee <a href="https://unect.com.br/" target="_blank">Unect Jr.</a> </p>
             <p>Feito com <span className="material-icons">favorite</span> por <a href="https://github.com/Gabriel-16n5" target="_blank">Gabriel Granjeia</a></p>
         </Footer>
@@ -13,12 +14,13 @@ const Footer = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color:#114FA7;
     width: 100%;
     min-height: 50px;
     bottom: 0;
     left: 0;
     z-index: 1000;
+    background-color: ${(props) => (props.darkMode ? "#111111" : "#114FA7")};
+
     @media screen and (max-width: 480px) {
         justify-content: center;
         align-items: start;

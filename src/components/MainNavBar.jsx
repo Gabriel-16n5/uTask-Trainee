@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import logoBranco from "../assets/LogoBranca.png"
+import logoBranco from "../assets/LogoBranca.png";
+import logoBlue from "../assets/LogoAzul.png";
 import Switch from "react-switch";
 import { useState } from "react";
 
@@ -11,14 +12,15 @@ export default function MainNavBar(props) {
 
     const switchHandlerDarkMode = (checked) => {
         setDarkModeVerify(checked);
+        setDarkMode(checked);
         if(darkModeVerify === false) setDarkMode(true);
         if (darkModeVerify === true) setDarkMode(false);
     };
 
     return (
-        <MainNav>
-            <img src={logoBranco} alt="logo branca" />
-            <Title>uTask 3.0</Title>
+        <MainNav darkModeVerify={darkModeVerify}>
+            {darkModeVerify ? <img src={logoBlue} alt="icon"></img> : <img src={logoBranco} alt="icon"></img>}
+            <Title darkModeVerify={darkModeVerify}>uTask 3.0</Title>
             <ButtonContainer>
             <Button>
                 <Switch
@@ -38,7 +40,7 @@ const MainNav = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #226ED8;
+    background-color: ${(props) => (props.darkModeVerify ? "#333333" : "#226ED8")};
     width: 100%;
     height: 80px;
     position: fixed;
@@ -61,7 +63,7 @@ const MainNav = styled.div`
 `
 
 const Title = styled.h1`
-    color: #FAFAFA;
+    color: ${(props) => (props.darkModeVerify ? "#3867d6" : "#FAFAFA")};
     font-family: Poppins, sans-serif;
     font-size: 42px;
     font-weight: 700;
