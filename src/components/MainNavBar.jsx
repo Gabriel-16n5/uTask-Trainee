@@ -4,8 +4,6 @@ import logoBlue from "../assets/LogoAzul.png";
 import Switch from "react-switch";
 import { useState } from "react";
 
-
-
 export default function MainNavBar(props) {
     const {setDarkMode} = props
     const [darkModeVerify, setDarkModeVerify] = useState(false);
@@ -29,7 +27,6 @@ export default function MainNavBar(props) {
                 offColor="#FFC93F"
                 onColor="#222222"
                 />
-                {/* <p>Dark Mode</p> */}
             </Button>
         </ButtonContainer>
         </MainNav>
@@ -80,15 +77,6 @@ const Button = styled.div`
     display:flex;
     justify-content: center;
     align-items: start;
-    /* p{
-        font-size:.7vw;
-        margin-top: 4px;
-        margin-left: 10px;
-        font-family: 'Open Sans';
-        @media(max-width: 1540px) {
-        font-size: 5vw;
-    }
-    } */
 `
 const ButtonContainer = styled.div`
     display:flex;
