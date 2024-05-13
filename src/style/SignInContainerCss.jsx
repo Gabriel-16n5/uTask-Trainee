@@ -120,9 +120,15 @@ export const LoginContainer = styled.div`
 }
 `
 
-export const ImgLogin = styled.img`
+export const ImgLogin = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    max-height:1000px;
+    max-width:920px;
     width: 45vw;
     height: auto;
+    overflow-y:hidden;
     @media screen and (max-width: 1023px), (max-height: 599px) {
         display:none;
 }
@@ -134,6 +140,8 @@ export const PageContainer = styled.div`
     align-items: center;
     width: 100vw;
     height: 100vh;
+    max-height:1080px;
+    max-width:1920px;
     @media screen and (max-width: 1023px), (max-height: 599px) {
         flex-direction: column;
         width: auto;

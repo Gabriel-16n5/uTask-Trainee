@@ -98,9 +98,15 @@ export const RegisterContainer = styled.div`
 }
 `
 
-export const ImgRegister = styled.img`
+export const ImgRegister = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    max-height:1000px;
+    max-width:920px;
     width: 45vw;
     height: auto;
+    overflow-y:hidden;
     @media screen and (max-width: 1023px), (max-height: 799px) {
         display:none;
 }
@@ -114,6 +120,8 @@ export const PageContainer = styled.div`
     height: auto;
     width: 100vw;
     height: 100vh;
+    max-height:1080px;
+    max-width:1920px;
     @media screen and (max-width: 1023px), (max-height: 799px) {
         flex-direction: column;
         width: auto;

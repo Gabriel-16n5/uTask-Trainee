@@ -23,7 +23,7 @@ export default function SignInContainer() {
 
     return (
         <PageContainer>
-            <ImgLogin src={ImagemLogin} alt="imagem de login" />
+            <ImgLogin><img src={ImagemLogin} alt="imagem de login" /></ImgLogin>
             <VerticalSeparator/>
             <LoginContainer>
                 <Title>uTask 3.0</Title>

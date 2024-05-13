@@ -98,7 +98,7 @@ export default function SignUpContainer() {
                 </RegisterContent>
             </RegisterContainer>
             <VerticalSeparator/>
-            <ImgRegister src={ImagemRegister} alt="imagem de login" />
+            <ImgRegister><img src={ImagemRegister} alt="imagem de login"/></ImgRegister>
         </PageContainer>
     )
 }
