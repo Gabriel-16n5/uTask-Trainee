@@ -10,15 +10,8 @@ import Swal from 'sweetalert2';
 
 export default function HomePage() {
     const [darkMode, setDarkMode] = useState(false);
-    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        // if(cityForSearch === ""){
-        // fetchGeoLocalization()
-        // }
-        // fetchWeatherInfo()
-        // fetchForeCastInfo()
-        
     }, [darkMode]);
 
     const openModal = () => {

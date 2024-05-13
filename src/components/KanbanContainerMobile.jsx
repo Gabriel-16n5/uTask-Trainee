@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
+import {  handleNextSlide,  handlePrevSlide,  handleExpandCard,  handleAddCard,  handleDeleteCard,  handleMoveToAFazer,  handleMoveToAndamento,  handleMoveToFeito,  handleDeleteCardFromAndamento,  handleDeleteCardFromFeito,  handleMoveToAndamentoFromFeito,  handleMoveToAFazerFromFeito,
+} from '../handlers/kanbanHandlers';
 
 const KanbanMobile = (props) => {
   const { darkMode } = props;
@@ -10,34 +12,6 @@ const KanbanMobile = (props) => {
   const [newCardText, setNewCardText] = useState('');
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const handleNextSlide = () => {
-    setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, 2));
-  };
-
-  const handlePrevSlide = () => {
-    setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
-  };
-
-  const handleExpandCard = (id) => {
-    setExpandedCardId(id === expandedCardId ? null : id);
-  };
-
-  const handleAddCard = (title, description) => {
-    if (!title.trim() && !description.trim()) return;
-
-    const newCard = {
-      id: Math.random().toString(36).substr(2, 9),
-      title,
-      description,
-    };
-    setCards([...cards, newCard]);
-  };
-
-  const handleDeleteCard = (id) => {
-    const updatedCards = cards.filter((card) => card.id !== id);
-    setCards(updatedCards);
-  };
 
   const openAddCardModal = () => {
     Swal.fire({
@@ -59,139 +33,98 @@ const KanbanMobile = (props) => {
     }).then((result) => {
       if (result.isConfirmed) {
         const { title, description } = result.value;
-        handleAddCard(title, description);
+        handleAddCard(title, description, cards, setCards);
       }
     });
   };
-
-  const handleMoveToAFazer = (id) => {
-    const movedCard = cardsAndamento.find((card) => card.id === id);
-    setCardsAndamento(cardsAndamento.filter((card) => card.id !== id));
-    setCards([...cards, movedCard]);
-  };
   
-  const handleMoveToAndamento = (id) => {
-    const movedCard = cards.find((card) => card.id === id);
-    setCards(cards.filter((card) => card.id !== id));
-    setCardsAndamento([...cardsAndamento, movedCard]);
-  };
-  
-  const handleMoveToFeito = (id) => {
-    const movedCard = cardsAndamento.find((card) => card.id === id);
-    setCardsAndamento(cardsAndamento.filter((card) => card.id !== id));
-    setCardsFeito([...cardsFeito, movedCard]);
-  };
-
-  const handleDeleteCardFromAndamento = (id) => {
-    const updatedCards = cardsAndamento.filter((card) => card.id !== id);
-    setCardsAndamento(updatedCards);
-  };
-  
-  const handleDeleteCardFromFeito = (id) => {
-    const updatedCards = cardsFeito.filter((card) => card.id !== id);
-    setCardsFeito(updatedCards);
-  };
-
-  const handleMoveToAndamentoFromFeito = (id) => {
-    const movedCard = cardsFeito.find((card) => card.id === id);
-    setCardsFeito(cardsFeito.filter((card) => card.id !== id));
-    setCardsAndamento([...cardsAndamento, movedCard]);
-  };
-
-  const handleMoveToAFazerFromFeito = (id) => {
-    const movedCard = cardsFeito.find((card) => card.id === id);
-    setCardsFeito(cardsFeito.filter((card) => card.id !== id));
-    setCards([...cards, movedCard]);
-  };
 
   return (
     <KanbanContainer>
       <SliderContainer>
         <SliderWrapper style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-        <ColumnMain>
-          <ColumnHeader>
-            <ColumnTitle darkMode={darkMode}>A Fazer</ColumnTitle>
-            <PlusButton onClick={openAddCardModal}>
-              <span className="material-icons">control_point</span>
-            </PlusButton>
-          </ColumnHeader>
-          <Column darkMode={darkMode}>
-            {cards.map((card) => (
-              <CardContainer darkMode={darkMode} key={card.id}>
+          <ColumnMain>
+            <ColumnHeader>
+              <ColumnTitle darkMode={darkMode}>A Fazer</ColumnTitle>
+              <PlusButton onClick={openAddCardModal}>
+                <span className="material-icons">control_point</span>
+              </PlusButton>
+            </ColumnHeader>
+            <Column darkMode={darkMode}>
+              {cards.map((card) => (
+                <CardContainer darkMode={darkMode} key={card.id}>
                   <h5>{card.title}</h5>
                   <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
-                      {card.description}
+                    {card.description}
                   </DescriptionContainer>
-                  <ExpandButton darkMode={darkMode} onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                      {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                  <ExpandButton darkMode={darkMode} onClick={() => handleExpandCard(card.id, expandedCardId, setExpandedCardId)} isExpanded={expandedCardId === card.id}>
+                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
                   </ExpandButton>
                   <DeleteContainer>
-                      <ActionButtonContainer>
-                          <ActionButton darkMode={darkMode} onClick={() => handleMoveToAndamento(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
-                      </ActionButtonContainer>
-                      <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCard(card.id)}>
-                      <span className="material-icons">delete</span>
-                      </DeleteButton>
+                    <ActionButtonContainer>
+                    <ActionButton darkMode={darkMode} onClick={() => handleMoveToAndamento(card.id, cards, setCards, cardsAndamento, setCardsAndamento)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                    </ActionButtonContainer>
+                    <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCard(card.id, cards, setCards)}><span className="material-icons">delete</span></DeleteButton>
                   </DeleteContainer>
-              </CardContainer>
-            ))}
-          </Column>
-        </ColumnMain>
-        <ColumnMain>
-          <ColumnHeader>
+                </CardContainer>
+              ))}
+            </Column>
+          </ColumnMain>
+          <ColumnMain>
+            <ColumnHeader>
               <ColumnTitle darkMode={darkMode}>Em andamento</ColumnTitle>
-          </ColumnHeader>
-          <Column darkMode={darkMode}>
-          {cardsAndamento.map((card) => (
-              <CardContainer darkMode={darkMode} key={card.id}>
-              <h5>{card.title}</h5>
-              <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
-                  {card.description}
-              </DescriptionContainer>
-              <ExpandButton darkMode={darkMode} onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                  {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
-              </ExpandButton>
-              <DeleteContainer>
-                      <ActionButtonContainer>
-                          <ActionButton darkMode={darkMode} onClick={() => handleMoveToAFazer(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
-                          <ActionButton darkMode={darkMode} onClick={() => handleMoveToFeito(card.id)}><span class="material-icons">arrow_circle_right</span></ActionButton>
-                      </ActionButtonContainer>
-                      <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCardFromAndamento(card.id)}><span className="material-icons">delete</span></DeleteButton>
-              </DeleteContainer>
-          </CardContainer>
-            ))}
-          </Column>
-        </ColumnMain>
-        <ColumnMain>
-          <ColumnHeader>
-              <ColumnTitle darkMode={darkMode}>Feito</ColumnTitle>
-          </ColumnHeader>
-          <Column darkMode={darkMode}>
-          {cardsFeito.map((card) => (
-              <CardContainer darkMode={darkMode} key={card.id}>
+            </ColumnHeader>
+            <Column darkMode={darkMode}>
+              {cardsAndamento.map((card) => (
+                <CardContainer darkMode={darkMode} key={card.id}>
                   <h5>{card.title}</h5>
                   <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
-                      {card.description}
+                    {card.description}
+                  </DescriptionContainer>
+                  <ExpandButton darkMode={darkMode} onClick={() => handleExpandCard(card.id, expandedCardId, setExpandedCardId)} isExpanded={expandedCardId === card.id}>
+                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                  </ExpandButton>
+                  <DeleteContainer>
+                    <ActionButtonContainer>
+                      <ActionButton darkMode={darkMode} onClick={() => handleMoveToAFazer(card.id, cardsAndamento, setCardsAndamento, cards, setCards)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                      <ActionButton darkMode={darkMode} onClick={() => handleMoveToFeito(card.id, cardsAndamento, setCardsAndamento, cardsFeito, setCardsFeito)}><span class="material-icons">arrow_circle_right</span></ActionButton>
+                    </ActionButtonContainer>
+                    <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCardFromAndamento(card.id, cardsAndamento, setCardsAndamento)}><span className="material-icons">delete</span></DeleteButton>
+                  </DeleteContainer>
+                </CardContainer>
+              ))}
+            </Column>
+          </ColumnMain>
+          <ColumnMain>
+            <ColumnHeader>
+              <ColumnTitle darkMode={darkMode}>Feito</ColumnTitle>
+            </ColumnHeader>
+            <Column darkMode={darkMode}>
+              {cardsFeito.map((card) => (
+                <CardContainer darkMode={darkMode} key={card.id}>
+                  <h5>{card.title}</h5>
+                  <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
+                    {card.description}
                   </DescriptionContainer>
                   <ExpandButton onClick={() => handleExpandCard(card.id)} isExpanded={expandedCardId === card.id}>
-                      {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                    {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
                   </ExpandButton>
                   <DeleteContainer>
-                      <ActionButtonContainer>
-                          <ActionButton darkMode={darkMode} onClick={() => handleMoveToAndamentoFromFeito(card.id)}><span class="material-icons">arrow_circle_left</span></ActionButton>
-                          <ActionButton darkMode={darkMode} onClick={() => handleMoveToAFazerFromFeito(card.id)}><span class="material-icons">replay</span></ActionButton>
-                      </ActionButtonContainer>
-                      <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCardFromFeito(card.id)}><span className="material-icons">delete</span></DeleteButton>
-              </DeleteContainer>
-              </CardContainer>
-            ))}
-          </Column>
-        </ColumnMain>
+                    <ActionButtonContainer>
+                      <ActionButton darkMode={darkMode} onClick={() => handleMoveToAndamentoFromFeito(card.id, cardsFeito, setCardsFeito, cardsAndamento, setCardsAndamento)}><span class="material-icons">arrow_circle_left</span></ActionButton>
+                      <ActionButton darkMode={darkMode} onClick={() => handleMoveToAFazerFromFeito(card.id, cardsFeito, setCardsFeito, cards, setCards)}><span class="material-icons">replay</span></ActionButton>
+                    </ActionButtonContainer>
+                    <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCardFromFeito(card.id, cardsFeito, setCardsFeito)}><span className="material-icons">delete</span></DeleteButton>
+                  </DeleteContainer>
+                </CardContainer>
+              ))}
+            </Column>
+          </ColumnMain>
         </SliderWrapper>
       </SliderContainer>
       <Controls>
-        <Button onClick={handlePrevSlide}>Anterior</Button>
-        <Button onClick={handleNextSlide}>Próximo</Button>
+        <Button onClick={() => handlePrevSlide(setCurrentSlide)}>Anterior</Button>
+        <Button onClick={() => handleNextSlide(setCurrentSlide)}>Próximo</Button>
       </Controls>
     </KanbanContainer>
   );
