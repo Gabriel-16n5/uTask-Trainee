@@ -9,7 +9,6 @@ const Kanban = (props) => {
   const [cardsFeito, setCardsFeito] = useState([]);
   const [newCardText, setNewCardText] = useState('');
   const [expandedCardId, setExpandedCardId] = useState(null);
-
   const handleExpandCard = (id) => {
     setExpandedCardId(id === expandedCardId ? null : id);
   };
