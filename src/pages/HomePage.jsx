@@ -17,7 +17,7 @@ export default function HomePage() {
 
     const openModal = () => {
         Swal.fire({
-            title: '<img src="src/assets/Icone.png" alt="Imagem">Frase do dia',
+            title: `<img src=${icon} alt="Imagem">Frase do dia`,
             html: '<br><p>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</p>',
             showCloseButton: true,
             focusConfirm: false,
