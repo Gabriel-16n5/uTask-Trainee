@@ -20,7 +20,14 @@ export const OptionsButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  color: ${(props) => (props.darkMode ? "#fafafa" : "#226ed8")};
+  color: ${(props) =>
+    props.darkMode
+      ? props.showDeleteButton
+        ? "#226ed8"
+        : "#fafafa"
+      : props.showDeleteButton
+      ? "#232323"
+      : "#226ed8"};
   .material-icons {
     font-size: 24px;
   }
@@ -98,7 +105,7 @@ const KanbanMobile = (props) => {
               <Column darkMode={darkMode}>
                 {column.cards.map((card) => (
                   <CardContainer darkMode={darkMode} key={card.id}>
-                    <h5>{card.title}<OptionsButton darkMode={darkMode} onClick={() => handleOptionsClick(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
+                    <h5>{card.title}<OptionsButton darkMode={darkMode} showDeleteButton={showDeleteButton} onClick={() => handleOptionsClick(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
                     <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
                       {card.description}
                     </DescriptionContainer>
