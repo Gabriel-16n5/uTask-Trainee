@@ -7,17 +7,24 @@ export const DeleteContainer = styled.div`
 
 export const DeleteButton = styled.button`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  padding-top: 8px;
-  background: none;
-  border: none;
-  font: inherit;
+  padding: 8px 16px;
+  background-color: ${(props) => (props.darkMode ? "#2c2c2c" : "#ffffff")};
+  box-shadow: 0px 0px 4px 0px #00000040;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
   cursor: pointer;
-  outline: inherit;
   color: ${(props) => (props.darkMode ? "#ffafaf" : "#DF0000")};
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+
   .material-icons {
     font-size: 24px;
+    margin-right: 8px;
   }
 `;
 
@@ -126,6 +133,8 @@ export const CardContainer = styled.div`
   }
 
   h5 {
+    display:flex;
+    justify-content: space-between;
     font-family: Poppins;
     font-size: 18px;
     font-weight: 600;
@@ -133,6 +142,7 @@ export const CardContainer = styled.div`
     text-align: left;
     overflow-wrap: break-word; 
     word-wrap: break-word; 
+    word-break: break-word;
     margin-left: 5px;
     color: ${(props) => (props.darkMode ? "#ffffff" : "")};
   }
@@ -194,5 +204,20 @@ export const Button = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+`;
+
+export const IndicatorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`;
+
+export const Indicator = styled.div`
+  width: 12px;
+  height: 12px;
+  background: ${(props) => (props.isActive ? '#007BFF' : '#ccc')};
+  border-radius: 50%;
+  margin: 0 4px;
   cursor: pointer;
 `;
