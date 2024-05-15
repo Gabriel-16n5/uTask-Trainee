@@ -1,7 +1,9 @@
-import {CustomLink, HorizontalSeparator, Icon, ImgLogin, LoginButton, LoginContainer, LoginInput, PageContainer, PasswordField, RegisterLink, SingInContainer, Title, VerticalSeparator} from '../style/SignInContainerCss'
+import { CustomLink, HorizontalSeparator, Icon, ImgLogin, LoginButton, LoginContainer, LoginInput, PageContainer, PasswordField, RegisterLink, SingInContainer, Title, VerticalSeparator } from '../style/SignInContainerCss'
 import React, { useState } from "react"
+import axios from 'axios';
 import ImagemLogin from "../assets/Task management.svg"
 import { useNavigate } from 'react-router-dom'
+import Swal from "sweetalert2";
 
 export default function SignInContainer() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -12,10 +14,32 @@ export default function SignInContainer() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    function submitLogin(e) {
+    async function submitLogin(e) {
         e.preventDefault();
-        navigate("/home");
+        try {
+            const response = await axios.post('http://localhost:5000/signin', formData);
+            if (response.status === 200) {
+                localStorage.setItem('Authorization', response.data.token);
+                navigate("/home");
+            } else {
+                Swal.fire({
+                    title: "Erro ao fazer login",
+                    text: "Por favor, verifique suas credenciais e tente novamente.",
+                    icon: "error",
+                    showConfirmButton: true,
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            Swal.fire({
+                title: "Erro ao fazer login",
+                text: "Ocorreu um erro durante o login. Por favor, tente novamente mais tarde.",
+                icon: "error",
+                showConfirmButton: true,
+            });
+        }
     }
+    
 
     function handleVisibilityToggle() {
         setShowPassword(!showPassword);
@@ -24,7 +48,7 @@ export default function SignInContainer() {
     return (
         <PageContainer>
             <ImgLogin><img src={ImagemLogin} alt="imagem de login" /></ImgLogin>
-            <VerticalSeparator/>
+            <VerticalSeparator />
             <LoginContainer>
                 <Title>uTask 3.0</Title>
                 <SingInContainer>

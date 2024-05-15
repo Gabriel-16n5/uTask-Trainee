@@ -1,4 +1,4 @@
-import {FraseDoDia, FraseDoDiaContainer, FraseDoDiaContainerMobile, FraseDoDiaContent, FraseDoDiaTitle, FraseDoDiaTitleMobile, Icon, PageContainer} from '../style/HomePageCss'
+import { FraseDoDia, FraseDoDiaContainer, FraseDoDiaContainerMobile, FraseDoDiaContent, FraseDoDiaTitle, FraseDoDiaTitleMobile, Icon, PageContainer } from '../style/HomePageCss'
 import React, { useState, useEffect } from 'react';
 import MainNavBar from "../components/MainNavBar";
 import FooterBar from "../components/Footer";
@@ -7,13 +7,35 @@ import iconDark from "../assets/IconeDark.png"
 import Kanban from "../components/KanbanContainer"
 import KanbanMobile from "../components/KanbanContainerMobile"
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export default function HomePage() {
     const [darkMode, setDarkMode] = useState(false);
 
-    useEffect(() => {  
+    useEffect(() => {
+        async function validateToken() {
+            try {
+                const token = localStorage.getItem('Authorization');
+                if (!token) {
+                    window.location.href = '/';
+                    return;
+                }
+                const response = await axios.get('http://localhost:5000/home', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                if (response.status === 200) {
+                    console.log('Token válido');
+                }
+            } catch (error) {
+                console.error('Erro ao validar o token:', error);
+                window.location.href = '/';
+            }
+        }
 
-    }, [darkMode]);
+        validateToken();
+    }, []);
 
     const openModal = () => {
         Swal.fire({
@@ -39,9 +61,9 @@ export default function HomePage() {
                     <FraseDoDia darkMode={darkMode}>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</FraseDoDia>
                 </FraseDoDiaContent>
             </FraseDoDiaContainer>
-            <Kanban darkMode={darkMode}/>
-            <KanbanMobile darkMode={darkMode}/>
-            <FooterBar darkMode={darkMode}/>
+            <Kanban darkMode={darkMode} />
+            <KanbanMobile darkMode={darkMode} />
+            <FooterBar darkMode={darkMode} />
         </PageContainer>
     )
 }

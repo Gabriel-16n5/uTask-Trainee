@@ -1,11 +1,12 @@
-import {HorizontalSeparator, Icon, ImgRegister, PageContainer, PasswordField, PasswordMismatchMessage, RegisterButton, RegisterContainer, RegisterContent, RegisterInput, SubTitle, Title, VerticalSeparator} from '../style/SignUpContainerCss'
+import { HorizontalSeparator, Icon, ImgRegister, PageContainer, PasswordField, PasswordMismatchMessage, RegisterButton, RegisterContainer, RegisterContent, RegisterInput, SubTitle, Title, VerticalSeparator } from '../style/SignUpContainerCss'
 import React, { useState } from "react"
+import axios from 'axios';
 import ImagemRegister from "../assets/Tasks complete.svg"
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2"
 
 export default function SignUpContainer() {
-    const [formData, setFormData] = useState({ userName: '', email: '', password: '', confirmPassword: '' });
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
@@ -18,17 +19,24 @@ export default function SignUpContainer() {
         }
     }
 
-    function submitRegister(e) {
+    async function submitRegister(e) {
         e.preventDefault();
-        Swal.fire({
-            title: "Conta criada com sucesso",
-            text: "Um instante, iremos te redirecionar ao login !",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2500,
-        });
-        navigate("/");
+        const { confirmPassword, ...formDataToSend } = formData;
+        try {
+            await axios.post('http://localhost:5000/signup', formDataToSend);
+            Swal.fire({
+                title: "Conta criada com sucesso",
+                text: "Um instante, iremos te redirecionar ao login !",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2500,
+            });
+            navigate("/");
+        } catch (error) {
+            console.error('Erro ao enviar dados do formulário:', error.mess);
+        }
     }
+    
 
     function handleVisibilityToggle() {
         setShowPassword(!showPassword);
@@ -46,10 +54,10 @@ export default function SignUpContainer() {
                             <p>Nome do usuário</p>
                             <RegisterInput
                                 placeholder="Seu nome de usuário"
-                                type="userName"
-                                name="userName"
+                                type="name"
+                                name="name"
                                 onChange={registerValidation}
-                                value={formData.userName}
+                                value={formData.name}
                                 required
                             />
                         </div>
