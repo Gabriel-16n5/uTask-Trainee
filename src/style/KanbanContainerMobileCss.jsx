@@ -32,7 +32,6 @@ export const DeleteButton = styled.button`
   font-size: 12px;
   font-weight: 400;
   text-align: left;
-
   .material-icons {
     font-size: 24px;
     margin-right: 8px;

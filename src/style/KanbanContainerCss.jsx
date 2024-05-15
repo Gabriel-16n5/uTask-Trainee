@@ -7,15 +7,21 @@ export const DeleteContainer = styled.div`
 
 export const DeleteButton = styled.button`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  padding-top: 8px;
-  background: none;
-  border: none;
-  font: inherit;
+  padding: 8px 16px;
+  background-color: ${(props) => (props.darkMode ? "#535353" : "#ffffff")};
+  box-shadow: 0px 0px 4px 0px #00000040;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${(props) => (props.darkMode ? "#2c2c2c" : "#ffffff")};
   cursor: pointer;
-  outline: inherit;
   color: ${(props) => (props.darkMode ? "#ffafaf" : "#DF0000")};
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
   .material-icons {
     font-size: 24px;
   }
@@ -102,13 +108,16 @@ export const CardContainer = styled.div`
     font-weight: 400;
     line-height: 18px;
     text-align: left;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
+    word-break: break-word;
     margin-left: 5px;
     margin-top: 5px;
   }
 
   h5 {
+    display:flex;
+    justify-content: space-between;
     font-family: Poppins;
     font-size: 18px;
     font-weight: 600;
@@ -116,6 +125,7 @@ export const CardContainer = styled.div`
     text-align: left;
     overflow-wrap: break-word; 
     word-wrap: break-word; 
+    word-break: break-word;
     margin-left: 5px;
     color: ${(props) => (props.darkMode ? "#ffffff" : "")};
 
@@ -153,13 +163,12 @@ export const ExpandButton = styled.button`
 
 export const ActionButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   margin-top: 10px;
 `;
 
 export const ActionButton = styled.button`
-      background-color: ${(props) => (props.darkMode ? "#3d3d3d" : "#ffffff")};
-
+  background-color: ${(props) => (props.darkMode ? "#3d3d3d" : "#ffffff")};
   color: #226ed8;
   border: none;
   border-radius: 50%;
