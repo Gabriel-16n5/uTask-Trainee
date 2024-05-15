@@ -80,7 +80,7 @@ const Kanban = (props) => {
             <ColumnTitle darkMode={darkMode}>{column.title}</ColumnTitle>
             {column.title === 'A Fazer' && (
               <PlusButton onClick={openAddCardModal}>
-                <span className="material-icons">control_point</span>
+                <span className="material-icons">add_circle_outline</span>
               </PlusButton>
             )}
           </ColumnHeader>
@@ -138,7 +138,7 @@ const Kanban = (props) => {
                               darkMode={darkMode}
                               onClick={() => handleMoveToAFazerFromFeito(card.id, cardsFeito, setCardsFeito, cards, setCards)}
                             >
-                              <span className="material-icons">replay</span>
+                              <span className="material-icons">replay_circle_filled</span>
                             </ActionButton>
                           </>
                         )}
