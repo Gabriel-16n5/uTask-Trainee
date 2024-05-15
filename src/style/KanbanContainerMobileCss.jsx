@@ -10,11 +10,12 @@ export const DeleteButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 8px 16px;
-  background-color: ${(props) => (props.darkMode ? "#2c2c2c" : "#ffffff")};
+  background-color: ${(props) => (props.darkMode ? "#535353" : "#ffffff")};
   box-shadow: 0px 0px 4px 0px #00000040;
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
+  border-color: ${(props) => (props.darkMode ? "#2c2c2c" : "#ffffff")};
   cursor: pointer;
   color: ${(props) => (props.darkMode ? "#ffafaf" : "#DF0000")};
   font-family: Poppins;
