@@ -25,7 +25,7 @@ export default function SignUpContainer() {
             text: "Um instante, iremos te redirecionar ao login !",
             icon: "success",
             showConfirmButton: false,
-            timer: 5500,
+            timer: 2500,
         });
         navigate("/");
     }

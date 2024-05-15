@@ -159,7 +159,7 @@ export const SubTitle = styled.h2`
 export const PasswordMismatchMessage = styled.h3`
     color: #820000;
     font-family: Poppins;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 15px;
     text-align: left;
