@@ -5,6 +5,16 @@ export const DeleteContainer = styled.div`
     justify-content: end;
 `
 
+export const ArrowButton = styled.button`
+    border:none;
+    background:none;
+    cursor:pointer;
+  .material-icons {
+    color: #226ed8;
+    font-size: 34px;
+  }
+`
+
 export const DeleteButton = styled.button`
   display: flex;
   justify-content: center;
@@ -78,6 +88,8 @@ export const SliderContainer = styled.div`
   width: 80vw;
   justify-content: center;
   align-items: center;
+  button{
+  }
 `
 
 export const ColumnMain = styled.div`
@@ -168,7 +180,7 @@ export const ExpandButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  color: ${(props) => (props.isExpanded ? '#002D6C' : props.darkMode ? '#fafafa' : '#141414')};
+  color: ${(props) => (props.isExpanded ? '#5485ce' : props.darkMode ? '#fafafa' : '#141414')};
   font-family: Poppins;
   font-size: 12px;
   font-weight: 300;
@@ -179,7 +191,7 @@ export const ExpandButton = styled.button`
 
 export const ActionButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   margin-top: 10px;
 `;
 
