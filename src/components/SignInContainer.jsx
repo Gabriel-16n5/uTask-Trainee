@@ -9,6 +9,7 @@ export default function SignInContainer() {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
 
     function loginValidation(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,7 +18,7 @@ export default function SignInContainer() {
     async function submitLogin(e) {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/signin', formData);
+            const response = await axios.post(`${apiUrl}/signin`, formData);
             if (response.status === 200) {
                 localStorage.setItem('Authorization', response.data.token);
                 navigate("/home");

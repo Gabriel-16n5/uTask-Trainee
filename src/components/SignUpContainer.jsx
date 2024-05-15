@@ -10,6 +10,7 @@ export default function SignUpContainer() {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
 
     function registerValidation(e) {
         const { name, value } = e.target;
@@ -23,7 +24,7 @@ export default function SignUpContainer() {
         e.preventDefault();
         const { confirmPassword, ...formDataToSend } = formData;
         try {
-            await axios.post('http://localhost:5000/signup', formDataToSend);
+            await axios.post(`${apiUrl}/signup`, formDataToSend);
             Swal.fire({
                 title: "Conta criada com sucesso",
                 text: "Um instante, iremos te redirecionar ao login !",

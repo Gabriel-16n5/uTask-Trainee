@@ -11,6 +11,7 @@ import axios from 'axios';
 
 export default function HomePage() {
     const [darkMode, setDarkMode] = useState(false);
+    const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
 
     useEffect(() => {
         async function validateToken() {
@@ -20,22 +21,32 @@ export default function HomePage() {
                     window.location.href = '/';
                     return;
                 }
-                const response = await axios.get('http://localhost:5000/home', {
+                await axios.get(`${apiUrl}/home`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                if (response.status === 200) {
-                    console.log('Token válido');
-                }
             } catch (error) {
                 console.error('Erro ao validar o token:', error);
                 window.location.href = '/';
             }
         }
-
+    
+        async function fetchRandomQuote() {
+                try {
+                    const response = await axios.get('https://type.fit/api/quotes');
+                    const randomIndex = Math.floor(Math.random() * response.data.length);
+                    const randomQuote = response.data[randomIndex].text;
+                    console.log(randomQuote);
+                } catch (error) {
+                    console.error('Erro ao obter a frase do dia:', error);
+                }
+            }
+    
+        fetchRandomQuote();
         validateToken();
     }, []);
+    
 
     const openModal = () => {
         Swal.fire({
