@@ -1,12 +1,17 @@
 import axios from 'axios';
 const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
 
-export const handleNextSlide = (setCurrentSlide) => {
-  setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, 2));
+export const handleOptionsClick = (cardId, showActionButtons, setShowActionButtons, showDeleteButton, setShowDeleteButton) => {
+  setShowActionButtons(showActionButtons === cardId ? null : cardId);
+  setShowDeleteButton(showDeleteButton === cardId ? null : cardId);
 };
 
-export const handlePrevSlide = (setCurrentSlide) => {
-  setCurrentSlide((prevSlide) => Math.max(prevSlide - 1, 0));
+export const handleNextSlide = (setCurrentSlide, totalSlides) => {
+  setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
+};
+
+export const handlePrevSlide = (setCurrentSlide, totalSlides) => {
+  setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides);
 };
 
 export const handleExpandCard = (id, expandedCardId, setExpandedCardId) => {

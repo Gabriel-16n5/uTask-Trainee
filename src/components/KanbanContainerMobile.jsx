@@ -9,6 +9,7 @@ import {
   handleNextSlide, handlePrevSlide, handleExpandCard, handleAddCard, handleDeleteCard,
   handleMoveToAFazer, handleMoveToAndamento, handleMoveToFeito, handleMoveToAndamentoFromFeito, handleMoveToAFazerFromFeito,
 } from '../handlers/kanbanHandlers';
+import {openAddCardModal} from '../utils/Modals';
 
 const KanbanMobile = (props) => {
   const { darkMode } = props;
@@ -19,49 +20,22 @@ const KanbanMobile = (props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showDeleteButton, setShowDeleteButton] = useState(null);
   const [showActionButtons, setShowActionButtons] = useState(null);
-
   const columnData = [
     { title: 'A Fazer', cards: cards, setCards: setCards },
     { title: 'Em andamento', cards: cardsAndamento, setCards: setCardsAndamento },
     { title: 'Feito', cards: cardsFeito, setCards: setCardsFeito },
   ];
-
-  const openAddCardModal = () => {
-    Swal.fire({
-      title: '<span style="color: #3867D6">Nova Task</span>',
-      html: `
-        <input id="swal-input1" class="swal2-input" placeholder="Título">
-        <input id="swal-input2" class="swal2-input" placeholder="Descrição">
-      `,
-      showCloseButton: true,
-      showConfirmButton: true,
-      confirmButtonText: 'Criar Task',
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const title = document.getElementById('swal-input1').value;
-        const description = document.getElementById('swal-input2').value;
-        return { title, description };
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const { title, description } = result.value;
-        handleAddCard(title, description, cards, setCards);
-      }
-    });
+  const totalSlides = columnData.length;
+  const handleAddCardModal = () => {
+    openAddCardModal(handleAddCard, cards, setCards);
   };
-
-  const handleOptionsClick = (cardId) => {
+  const handleOptionsClickMobile = (cardId) => {
     setShowActionButtons(showActionButtons === cardId ? null : cardId);
     setShowDeleteButton(showDeleteButton === cardId ? null : cardId);
   };
-
-  const totalSlides = columnData.length;
-
   const handleNext = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
   };
-
   const handlePrev = () => {
     setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides);
   };
@@ -76,7 +50,7 @@ const KanbanMobile = (props) => {
               <ColumnHeader>
                 <ColumnTitle darkMode={darkMode}>{column.title}</ColumnTitle>
                 {column.title === 'A Fazer' && (
-                  <PlusButton onClick={openAddCardModal}>
+                  <PlusButton onClick={handleAddCardModal}>
                     <span className="material-icons">add_circle_outline</span>
                   </PlusButton>
                 )}
@@ -84,7 +58,7 @@ const KanbanMobile = (props) => {
               <Column darkMode={darkMode}>
                 {column.cards.map((card) => (
                   <CardContainer darkMode={darkMode} key={card.id}>
-                    <h5>{card.title}<OptionsButton darkMode={darkMode} showDeleteButton={showDeleteButton} onClick={() => handleOptionsClick(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
+                    <h5>{card.title}<OptionsButton darkMode={darkMode} showDeleteButton={showDeleteButton} onClick={() => handleOptionsClickMobile(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
                     <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
                       {card.description}
                     </DescriptionContainer>

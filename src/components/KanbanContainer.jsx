@@ -1,8 +1,13 @@
-import React, { useEffect, useState,} from 'react';
-import {OptionsButton, ActionButton, ActionButtonContainer, CardContainer, Column, ColumnHeader, ColumnMain, ColumnTitle, DeleteButton, DeleteContainer, DescriptionContainer, ExpandButton, KanbanContainer, PlusButton} from '../style/KanbanContainerCss';
-import Swal from 'sweetalert2';
-import { handleExpandCard,  handleAddCard,  handleDeleteCard,  handleMoveToAFazer,  handleMoveToAndamento,  handleMoveToFeito,  handleMoveToAndamentoFromFeito,  handleMoveToAFazerFromFeito,
+import React, { useEffect, useState } from 'react';
+import {
+  OptionsButton, ActionButton, ActionButtonContainer, CardContainer, Column, ColumnHeader, ColumnMain,
+  ColumnTitle, DeleteButton, DeleteContainer, DescriptionContainer, ExpandButton, KanbanContainer, PlusButton
+} from '../style/KanbanContainerCss';
+import {
+  handleExpandCard, handleAddCard, handleDeleteCard, handleMoveToAFazer, handleMoveToAndamento, handleMoveToFeito,
+  handleMoveToAndamentoFromFeito, handleMoveToAFazerFromFeito, handleOptionsClick
 } from '../handlers/kanbanHandlers';
+import {openAddCardModalWeb} from "../utils/Modals";
 
 const Kanban = (props) => {
   const { darkMode } = props;
@@ -21,37 +26,7 @@ const Kanban = (props) => {
 
   useEffect(() => {
     console.log(tasks);
-  },[tasks, cards]);
-
-  const openAddCardModal = () => {
-    Swal.fire({
-      title: '<span style="color: #3867D6">Nova Task</span>',
-      html: `
-        <input id="swal-input1" class="swal2-input" placeholder="Título">
-        <input id="swal-input2" class="swal2-input" placeholder="Descrição">
-      `,
-      showCloseButton: true,
-      showConfirmButton: true,
-      confirmButtonText: 'Criar Task',
-      showLoaderOnConfirm: true,
-      preConfirm: () => {
-        const title = document.getElementById('swal-input1').value;
-        const description = document.getElementById('swal-input2').value;
-        return { title, description };
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const { title, description } = result.value;
-        handleAddCard(title, description, cards, setCards);
-      }
-    });
-  };
-
-  const handleOptionsClick = (cardId) => {
-    setShowActionButtons(showActionButtons === cardId ? null : cardId);
-    setShowDeleteButton(showDeleteButton === cardId ? null : cardId);
-  };
+  }, [tasks, cards]);
 
   return (
     <KanbanContainer>
@@ -60,7 +35,7 @@ const Kanban = (props) => {
           <ColumnHeader>
             <ColumnTitle darkMode={darkMode}>{column.title}</ColumnTitle>
             {column.title === 'A Fazer' && (
-              <PlusButton onClick={openAddCardModal}>
+              <PlusButton onClick={() => openAddCardModalWeb(cards, setCards, handleAddCard)}>
                 <span className="material-icons">add_circle_outline</span>
               </PlusButton>
             )}
@@ -68,7 +43,15 @@ const Kanban = (props) => {
           <Column darkMode={darkMode}>
             {column.cards.map((card) => (
               <CardContainer darkMode={darkMode} key={card.id}>
-                <h5>{card.title}<OptionsButton darkMode={darkMode} showDeleteButton={showDeleteButton} onClick={() => handleOptionsClick(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
+                <h5>{card.title}
+                  <OptionsButton
+                    darkMode={darkMode}
+                    showDeleteButton={showDeleteButton}
+                    onClick={() => handleOptionsClick(card.id, showActionButtons, setShowActionButtons, showDeleteButton, setShowDeleteButton)}
+                  >
+                    <span className="material-icons">more_vert</span>
+                  </OptionsButton>
+                </h5>
                 <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
                   {card.description}
                 </DescriptionContainer>
@@ -80,59 +63,59 @@ const Kanban = (props) => {
                   {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
                 </ExpandButton>
                 {showActionButtons !== card.id && (
-                      <ActionButtonContainer>
-                        {column.title === 'A Fazer' && (
-                          <ActionButton
-                            darkMode={darkMode}
-                            onClick={() => handleMoveToAndamento(card.id, cards, setCards, cardsAndamento, setCardsAndamento)}
-                          >
-                            <span className="material-icons">arrow_circle_right</span>
-                          </ActionButton>
-                        )}
-                        {column.title === 'Em andamento' && (
-                          <>
-                            <ActionButton
-                              darkMode={darkMode}
-                              onClick={() => handleMoveToAFazer(card.id, cardsAndamento, setCardsAndamento, cards, setCards)}
-                            >
-                              <span className="material-icons">arrow_circle_left</span>
-                            </ActionButton>
-                            <ActionButton
-                              darkMode={darkMode}
-                              onClick={() => handleMoveToFeito(card.id, cardsAndamento, setCardsAndamento, cardsFeito, setCardsFeito)}
-                            >
-                              <span className="material-icons">arrow_circle_right</span>
-                            </ActionButton>
-                          </>
-                        )}
-                        {column.title === 'Feito' && (
-                          <>
-                            <ActionButton
-                              darkMode={darkMode}
-                              onClick={() =>
-                                handleMoveToAndamentoFromFeito(card.id, cardsFeito, setCardsFeito, cardsAndamento, setCardsAndamento)
-                              }
-                            >
-                              <span className="material-icons">arrow_circle_left</span>
-                            </ActionButton>
-                            <ActionButton
-                              darkMode={darkMode}
-                              onClick={() => handleMoveToAFazerFromFeito(card.id, cardsFeito, setCardsFeito, cards, setCards)}
-                            >
-                              <span className="material-icons">replay_circle_filled</span>
-                            </ActionButton>
-                          </>
-                        )}
-                      </ActionButtonContainer>
+                  <ActionButtonContainer>
+                    {column.title === 'A Fazer' && (
+                      <ActionButton
+                        darkMode={darkMode}
+                        onClick={() => handleMoveToAndamento(card.id, cards, setCards, cardsAndamento, setCardsAndamento)}
+                      >
+                        <span className="material-icons">arrow_circle_right</span>
+                      </ActionButton>
                     )}
-                    {showActionButtons === card.id && (
-                      <DeleteContainer>
-                        <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCard(card.id, column.cards, column.setCards)}>
-                          <span className="material-icons">delete_outline</span>
-                          Excluir
-                        </DeleteButton>
-                      </DeleteContainer>
+                    {column.title === 'Em andamento' && (
+                      <>
+                        <ActionButton
+                          darkMode={darkMode}
+                          onClick={() => handleMoveToAFazer(card.id, cardsAndamento, setCardsAndamento, cards, setCards)}
+                        >
+                          <span className="material-icons">arrow_circle_left</span>
+                        </ActionButton>
+                        <ActionButton
+                          darkMode={darkMode}
+                          onClick={() => handleMoveToFeito(card.id, cardsAndamento, setCardsAndamento, cardsFeito, setCardsFeito)}
+                        >
+                          <span className="material-icons">arrow_circle_right</span>
+                        </ActionButton>
+                      </>
                     )}
+                    {column.title === 'Feito' && (
+                      <>
+                        <ActionButton
+                          darkMode={darkMode}
+                          onClick={() =>
+                            handleMoveToAndamentoFromFeito(card.id, cardsFeito, setCardsFeito, cardsAndamento, setCardsAndamento)
+                          }
+                        >
+                          <span className="material-icons">arrow_circle_left</span>
+                        </ActionButton>
+                        <ActionButton
+                          darkMode={darkMode}
+                          onClick={() => handleMoveToAFazerFromFeito(card.id, cardsFeito, setCardsFeito, cards, setCards)}
+                        >
+                          <span className="material-icons">replay_circle_filled</span>
+                        </ActionButton>
+                      </>
+                    )}
+                  </ActionButtonContainer>
+                )}
+                {showActionButtons === card.id && (
+                  <DeleteContainer>
+                    <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCard(card.id, column.cards, column.setCards)}>
+                      <span className="material-icons">delete_outline</span>
+                      Excluir
+                    </DeleteButton>
+                  </DeleteContainer>
+                )}
               </CardContainer>
             ))}
           </Column>
