@@ -18,7 +18,6 @@ export default function HomePage() {
         async function validateToken() {
             try {
                 const token = localStorage.getItem('Authorization');
-                console.log(token)
                 if (!token) {
                     window.location.href = '/';
                     return;
@@ -31,7 +30,7 @@ export default function HomePage() {
                 setTasks(response);
             } catch (error) {
                 console.error('Erro ao validar o token:', error);
-                window.location.href = '/';
+                // window.location.href = '/';
             }
         }
     
