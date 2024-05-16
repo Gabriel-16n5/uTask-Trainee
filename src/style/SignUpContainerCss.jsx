@@ -67,6 +67,7 @@ export const RegisterButton = styled.button`
     line-height: 24px;
     text-align: center;
     color: #FFFFFF;
+    cursor:pointer;
     @media screen and (max-width: 1023px), (max-height: 799px) {
         width:90vw;
 }
