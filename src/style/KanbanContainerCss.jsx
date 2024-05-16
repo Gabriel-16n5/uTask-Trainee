@@ -1,5 +1,27 @@
 import styled from 'styled-components';
 
+export const OptionsButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  color: ${(props) =>
+    props.darkMode
+      ? props.showDeleteButton
+        ? "#226ed8"
+        : "#fafafa"
+      : props.showDeleteButton
+      ? "#232323"
+      : "#226ed8"};
+  .material-icons {
+    font-size: 24px;
+  }
+`;
+
 export const DeleteContainer = styled.div`
     display:flex;
     justify-content: end;

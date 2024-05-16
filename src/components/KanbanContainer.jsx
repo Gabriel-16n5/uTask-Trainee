@@ -1,31 +1,8 @@
 import React, { useEffect, useState,} from 'react';
-import styled from 'styled-components';
-import {ActionButton, ActionButtonContainer, CardContainer, Column, ColumnHeader, ColumnMain, ColumnTitle, DeleteButton, DeleteContainer, DescriptionContainer, ExpandButton, KanbanContainer, PlusButton} from '../style/KanbanContainerCss';
+import {OptionsButton, ActionButton, ActionButtonContainer, CardContainer, Column, ColumnHeader, ColumnMain, ColumnTitle, DeleteButton, DeleteContainer, DescriptionContainer, ExpandButton, KanbanContainer, PlusButton} from '../style/KanbanContainerCss';
 import Swal from 'sweetalert2';
 import { handleExpandCard,  handleAddCard,  handleDeleteCard,  handleMoveToAFazer,  handleMoveToAndamento,  handleMoveToFeito,  handleMoveToAndamentoFromFeito,  handleMoveToAFazerFromFeito,
 } from '../handlers/kanbanHandlers';
-
-export const OptionsButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  color: ${(props) =>
-    props.darkMode
-      ? props.showDeleteButton
-        ? "#226ed8"
-        : "#fafafa"
-      : props.showDeleteButton
-      ? "#232323"
-      : "#226ed8"};
-  .material-icons {
-    font-size: 24px;
-  }
-`;
 
 const Kanban = (props) => {
   const { darkMode } = props;
@@ -36,8 +13,6 @@ const Kanban = (props) => {
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(null);
   const [showActionButtons, setShowActionButtons] = useState(null);
-  // const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
-
   const columnData = [
     { title: 'A Fazer', cards: cards, setCards: setCards },
     { title: 'Em andamento', cards: cardsAndamento, setCards: setCardsAndamento },

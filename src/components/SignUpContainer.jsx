@@ -1,16 +1,16 @@
-import { HorizontalSeparator, Icon, ImgRegister, PageContainer, PasswordField, PasswordMismatchMessage, RegisterButton, RegisterContainer, RegisterContent, RegisterInput, SubTitle, Title, VerticalSeparator } from '../style/SignUpContainerCss'
-import React, { useState } from "react"
+import { HorizontalSeparator, Icon, ImgRegister, PageContainer, PasswordField, PasswordMismatchMessage, RegisterButton, RegisterContainer, RegisterContent, RegisterInput, SubTitle, Title, VerticalSeparator } from '../style/SignUpContainerCss';
+import React, { useState } from "react";
 import axios from 'axios';
-import ImagemRegister from "../assets/Tasks complete.svg"
-import { useNavigate } from 'react-router-dom'
-import Swal from "sweetalert2"
+import ImagemRegister from "../assets/Tasks complete.svg";
+import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 export default function SignUpContainer() {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const navigate = useNavigate();
-    const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
 
     function registerValidation(e) {
         const { name, value } = e.target;

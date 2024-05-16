@@ -1,7 +1,7 @@
-import styled from "styled-components"
 import React from "react"
 import SimpleNavBar from "../components/SimpleNavBar";
 import SignInContainer from "../components/SignInContainer";
+import {PageContainer} from "../style/SignInPageCss";
 
 export default function SignInPage() {
   return (
@@ -11,17 +11,3 @@ export default function SignInPage() {
     </PageContainer>
   )
 }
-
-const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Roboto';
-    font-size: 24px;
-    text-align: center;
-    color: #293845;
-    @media screen and (max-width: 1023px), (max-height: 599px) {
-      width: 100%;
-      height:100%;
-}
-`

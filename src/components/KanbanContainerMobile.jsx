@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import {
-  ActionButton, ActionButtonContainer, Button, CardContainer, Column, ColumnHeader,
+  OptionsButton, ActionButton, ActionButtonContainer, Button, CardContainer, Column, ColumnHeader,
   ColumnMain, ColumnTitle, Controls, DeleteButton, DeleteContainer, DescriptionContainer,
   ExpandButton, KanbanContainer, PlusButton, SliderContainer, SliderWrapper, IndicatorContainer, Indicator, ArrowButton
 } from '../style/KanbanContainerMobileCss';
@@ -10,28 +9,6 @@ import {
   handleNextSlide, handlePrevSlide, handleExpandCard, handleAddCard, handleDeleteCard,
   handleMoveToAFazer, handleMoveToAndamento, handleMoveToFeito, handleMoveToAndamentoFromFeito, handleMoveToAFazerFromFeito,
 } from '../handlers/kanbanHandlers';
-
-export const OptionsButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  color: ${(props) =>
-    props.darkMode
-      ? props.showDeleteButton
-        ? "#226ed8"
-        : "#fafafa"
-      : props.showDeleteButton
-      ? "#232323"
-      : "#226ed8"};
-  .material-icons {
-    font-size: 24px;
-  }
-`;
 
 const KanbanMobile = (props) => {
   const { darkMode } = props;
@@ -194,4 +171,3 @@ const KanbanMobile = (props) => {
 };
 
 export default KanbanMobile;
-
