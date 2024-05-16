@@ -30,7 +30,7 @@ export default function HomePage() {
                 setTasks(response);
             } catch (error) {
                 console.error('Erro ao validar o token:', error);
-                // window.location.href = '/';
+                window.location.href = '/';
             }
         }
     
