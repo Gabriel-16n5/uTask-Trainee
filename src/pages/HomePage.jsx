@@ -18,6 +18,7 @@ export default function HomePage() {
         async function validateToken() {
             try {
                 const token = localStorage.getItem('Authorization');
+                console.log(token)
                 if (!token) {
                     window.location.href = '/';
                     return;
