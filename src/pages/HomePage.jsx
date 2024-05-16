@@ -12,6 +12,7 @@ import axios from 'axios';
 export default function HomePage() {
     const [darkMode, setDarkMode] = useState(false);
     const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         async function validateToken() {
@@ -21,11 +22,12 @@ export default function HomePage() {
                     window.location.href = '/';
                     return;
                 }
-                await axios.get(`${apiUrl}/home`, {
+                const response = await axios.get(`${apiUrl}/home`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
+                setTasks(response);
             } catch (error) {
                 console.error('Erro ao validar o token:', error);
                 window.location.href = '/';
@@ -72,7 +74,7 @@ export default function HomePage() {
                     <FraseDoDia darkMode={darkMode}>Se você quer um pedacinho do paraíso, acredite em Deus. Mas se você quer conquistar o mundo, acredite em você porque Deus já te deu tudo o que você precisa para você vencer.</FraseDoDia>
                 </FraseDoDiaContent>
             </FraseDoDiaContainer>
-            <Kanban darkMode={darkMode} />
+            <Kanban darkMode={darkMode} tasks={tasks}/>
             <KanbanMobile darkMode={darkMode} />
             <FooterBar darkMode={darkMode} />
         </PageContainer>

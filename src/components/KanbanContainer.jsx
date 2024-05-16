@@ -1,4 +1,4 @@
-import React, { useState,} from 'react';
+import React, { useEffect, useState,} from 'react';
 import styled from 'styled-components';
 import {ActionButton, ActionButtonContainer, CardContainer, Column, ColumnHeader, ColumnMain, ColumnTitle, DeleteButton, DeleteContainer, DescriptionContainer, ExpandButton, KanbanContainer, PlusButton} from '../style/KanbanContainerCss';
 import Swal from 'sweetalert2';
@@ -29,18 +29,24 @@ export const OptionsButton = styled.button`
 
 const Kanban = (props) => {
   const { darkMode } = props;
+  const { tasks } = props;
   const [cards, setCards] = useState([]);
   const [cardsAndamento, setCardsAndamento] = useState([]);
   const [cardsFeito, setCardsFeito] = useState([]);
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [showDeleteButton, setShowDeleteButton] = useState(null);
   const [showActionButtons, setShowActionButtons] = useState(null);
+  // const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
 
   const columnData = [
     { title: 'A Fazer', cards: cards, setCards: setCards },
     { title: 'Em andamento', cards: cardsAndamento, setCards: setCardsAndamento },
     { title: 'Feito', cards: cardsFeito, setCards: setCardsFeito },
   ];
+
+  useEffect(() => {
+    console.log(tasks);
+  },[tasks, cards]);
 
   const openAddCardModal = () => {
     Swal.fire({

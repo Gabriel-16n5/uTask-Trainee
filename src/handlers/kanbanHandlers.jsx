@@ -1,3 +1,6 @@
+import axios from 'axios';
+const apiUrl = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
+
 export const handleNextSlide = (setCurrentSlide) => {
   setCurrentSlide((prevSlide) => Math.min(prevSlide + 1, 2));
 };
@@ -10,14 +13,33 @@ export const handleExpandCard = (id, expandedCardId, setExpandedCardId) => {
   setExpandedCardId((prevState) => (id === prevState ? null : id));
 };
 
-export const handleAddCard = (title, description, cards, setCards) => {
+export const handleAddCard = async (title, description, cards, setCards) => {
   if (!title.trim() && !description.trim()) return;
+
+
+  try {
+    const token = localStorage.getItem('Authorization');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+    const result = await axios.post(`${apiUrl}/home`, {title, description}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    console.log(result)
+} catch (error) {
+    console.error('Erro ao validar o token:', error);
+    window.location.href = '/';
+}
 
   const newCard = {
     id: Math.random().toString(36).substr(2, 9),
     title,
     description,
   };
+
   setCards((prevCards) => [...prevCards, newCard]);
 };
 
