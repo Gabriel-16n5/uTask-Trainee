@@ -1,15 +1,15 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-font-family: 'Roboto';
-font-size: 24px;
-text-align: center;
-color: #293845;
-@media screen and (max-width: 1023px), (max-height: 799px) {
-  width: 100%;
-  height:100%;
-}
-`  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto';
+  font-size: 24px;
+  text-align: center;
+  color: #293845;
+  @media screen and (max-width: 1023px), (max-height: 799px) {
+    width: 100%;
+    height: 100%;
+  }
+`;

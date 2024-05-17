@@ -1,7 +1,5 @@
-import {SimpleNav} from "../style/SimpleNavBarCss";
+import { SimpleNav } from '../style/SimpleNavBarCss';
 
 export default function SimpleNavBar() {
-    return (
-        <SimpleNav></SimpleNav>
-    )
+  return <SimpleNav></SimpleNav>;
 }

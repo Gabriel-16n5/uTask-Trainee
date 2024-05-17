@@ -1,15 +1,41 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import {
-  OptionsButton, ActionButton, ActionButtonContainer, Button, CardContainer, Column, ColumnHeader,
-  ColumnMain, ColumnTitle, Controls, DeleteButton, DeleteContainer, DescriptionContainer,
-  ExpandButton, KanbanContainer, PlusButton, SliderContainer, SliderWrapper, IndicatorContainer, Indicator, ArrowButton
+  OptionsButton,
+  ActionButton,
+  ActionButtonContainer,
+  Button,
+  CardContainer,
+  Column,
+  ColumnHeader,
+  ColumnMain,
+  ColumnTitle,
+  Controls,
+  DeleteButton,
+  DeleteContainer,
+  DescriptionContainer,
+  ExpandButton,
+  KanbanContainer,
+  PlusButton,
+  SliderContainer,
+  SliderWrapper,
+  IndicatorContainer,
+  Indicator,
+  ArrowButton,
 } from '../style/KanbanContainerMobileCss';
 import {
-  handleNextSlide, handlePrevSlide, handleExpandCard, handleAddCard, handleDeleteCard,
-  handleMoveToAFazer, handleMoveToAndamento, handleMoveToFeito, handleMoveToAndamentoFromFeito, handleMoveToAFazerFromFeito,
+  handleNextSlide,
+  handlePrevSlide,
+  handleExpandCard,
+  handleAddCard,
+  handleDeleteCard,
+  handleMoveToAFazer,
+  handleMoveToAndamento,
+  handleMoveToFeito,
+  handleMoveToAndamentoFromFeito,
+  handleMoveToAFazerFromFeito,
 } from '../handlers/kanbanHandlers';
-import {openAddCardModal} from '../utils/Modals';
+import { openAddCardModal } from '../utils/Modals';
 
 const KanbanMobile = (props) => {
   const { darkMode } = props;
@@ -22,7 +48,11 @@ const KanbanMobile = (props) => {
   const [showActionButtons, setShowActionButtons] = useState(null);
   const columnData = [
     { title: 'A Fazer', cards: cards, setCards: setCards },
-    { title: 'Em andamento', cards: cardsAndamento, setCards: setCardsAndamento },
+    {
+      title: 'Em andamento',
+      cards: cardsAndamento,
+      setCards: setCardsAndamento,
+    },
     { title: 'Feito', cards: cardsFeito, setCards: setCardsFeito },
   ];
   const totalSlides = columnData.length;
@@ -43,8 +73,15 @@ const KanbanMobile = (props) => {
   return (
     <KanbanContainer>
       <SliderContainer>
-        <ArrowButton onClick={handlePrev} style={{ position: 'absolute', left: 0 }}>{<span className="material-icons">navigate_before</span>}</ArrowButton>
-        <SliderWrapper style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+        <ArrowButton
+          onClick={handlePrev}
+          style={{ position: 'absolute', left: 0 }}
+        >
+          {<span className="material-icons">navigate_before</span>}
+        </ArrowButton>
+        <SliderWrapper
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
           {columnData.map((column, index) => (
             <ColumnMain key={index}>
               <ColumnHeader>
@@ -58,40 +95,90 @@ const KanbanMobile = (props) => {
               <Column darkMode={darkMode}>
                 {column.cards.map((card) => (
                   <CardContainer darkMode={darkMode} key={card.id}>
-                    <h5>{card.title}<OptionsButton darkMode={darkMode} showDeleteButton={showDeleteButton} onClick={() => handleOptionsClickMobile(card.id)}><span className="material-icons">more_vert</span></OptionsButton></h5>
-                    <DescriptionContainer darkMode={darkMode} isExpanded={expandedCardId === card.id}>
+                    <h5>
+                      {card.title}
+                      <OptionsButton
+                        darkMode={darkMode}
+                        showDeleteButton={showDeleteButton}
+                        onClick={() => handleOptionsClickMobile(card.id)}
+                      >
+                        <span className="material-icons">more_vert</span>
+                      </OptionsButton>
+                    </h5>
+                    <DescriptionContainer
+                      darkMode={darkMode}
+                      isExpanded={expandedCardId === card.id}
+                    >
                       {card.description}
                     </DescriptionContainer>
                     <ExpandButton
                       darkMode={darkMode}
-                      onClick={() => handleExpandCard(card.id, expandedCardId, setExpandedCardId)}
+                      onClick={() =>
+                        handleExpandCard(
+                          card.id,
+                          expandedCardId,
+                          setExpandedCardId
+                        )
+                      }
                       isExpanded={expandedCardId === card.id}
                     >
-                      {expandedCardId === card.id ? 'Esconder descrição' : 'Ler mais'}
+                      {expandedCardId === card.id
+                        ? 'Esconder descrição'
+                        : 'Ler mais'}
                     </ExpandButton>
                     {showActionButtons !== card.id && (
                       <ActionButtonContainer>
                         {column.title === 'A Fazer' && (
                           <ActionButton
                             darkMode={darkMode}
-                            onClick={() => handleMoveToAndamento(card.id, cards, setCards, cardsAndamento, setCardsAndamento)}
+                            onClick={() =>
+                              handleMoveToAndamento(
+                                card.id,
+                                cards,
+                                setCards,
+                                cardsAndamento,
+                                setCardsAndamento
+                              )
+                            }
                           >
-                            <span className="material-icons">arrow_circle_right</span>
+                            <span className="material-icons">
+                              arrow_circle_right
+                            </span>
                           </ActionButton>
                         )}
                         {column.title === 'Em andamento' && (
                           <>
                             <ActionButton
                               darkMode={darkMode}
-                              onClick={() => handleMoveToAFazer(card.id, cardsAndamento, setCardsAndamento, cards, setCards)}
+                              onClick={() =>
+                                handleMoveToAFazer(
+                                  card.id,
+                                  cardsAndamento,
+                                  setCardsAndamento,
+                                  cards,
+                                  setCards
+                                )
+                              }
                             >
-                              <span className="material-icons">arrow_circle_left</span>
+                              <span className="material-icons">
+                                arrow_circle_left
+                              </span>
                             </ActionButton>
                             <ActionButton
                               darkMode={darkMode}
-                              onClick={() => handleMoveToFeito(card.id, cardsAndamento, setCardsAndamento, cardsFeito, setCardsFeito)}
+                              onClick={() =>
+                                handleMoveToFeito(
+                                  card.id,
+                                  cardsAndamento,
+                                  setCardsAndamento,
+                                  cardsFeito,
+                                  setCardsFeito
+                                )
+                              }
                             >
-                              <span className="material-icons">arrow_circle_right</span>
+                              <span className="material-icons">
+                                arrow_circle_right
+                              </span>
                             </ActionButton>
                           </>
                         )}
@@ -100,16 +187,34 @@ const KanbanMobile = (props) => {
                             <ActionButton
                               darkMode={darkMode}
                               onClick={() =>
-                                handleMoveToAndamentoFromFeito(card.id, cardsFeito, setCardsFeito, cardsAndamento, setCardsAndamento)
+                                handleMoveToAndamentoFromFeito(
+                                  card.id,
+                                  cardsFeito,
+                                  setCardsFeito,
+                                  cardsAndamento,
+                                  setCardsAndamento
+                                )
                               }
                             >
-                              <span className="material-icons">arrow_circle_left</span>
+                              <span className="material-icons">
+                                arrow_circle_left
+                              </span>
                             </ActionButton>
                             <ActionButton
                               darkMode={darkMode}
-                              onClick={() => handleMoveToAFazerFromFeito(card.id, cardsFeito, setCardsFeito, cards, setCards)}
+                              onClick={() =>
+                                handleMoveToAFazerFromFeito(
+                                  card.id,
+                                  cardsFeito,
+                                  setCardsFeito,
+                                  cards,
+                                  setCards
+                                )
+                              }
                             >
-                              <span className="material-icons">replay_circle_filled</span>
+                              <span className="material-icons">
+                                replay_circle_filled
+                              </span>
                             </ActionButton>
                           </>
                         )}
@@ -117,7 +222,16 @@ const KanbanMobile = (props) => {
                     )}
                     {showActionButtons === card.id && (
                       <DeleteContainer>
-                        <DeleteButton darkMode={darkMode} onClick={() => handleDeleteCard(card.id, column.cards, column.setCards)}>
+                        <DeleteButton
+                          darkMode={darkMode}
+                          onClick={() =>
+                            handleDeleteCard(
+                              card.id,
+                              column.cards,
+                              column.setCards
+                            )
+                          }
+                        >
                           <span className="material-icons">delete_outline</span>
                           Excluir
                         </DeleteButton>
@@ -129,7 +243,12 @@ const KanbanMobile = (props) => {
             </ColumnMain>
           ))}
         </SliderWrapper>
-        <ArrowButton onClick={handleNext} style={{ position: 'absolute', right: 0 }}>{<span className="material-icons">navigate_next</span>}</ArrowButton>
+        <ArrowButton
+          onClick={handleNext}
+          style={{ position: 'absolute', right: 0 }}
+        >
+          {<span className="material-icons">navigate_next</span>}
+        </ArrowButton>
       </SliderContainer>
       <IndicatorContainer>
         {columnData.map((_, index) => (
