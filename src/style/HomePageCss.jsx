@@ -65,7 +65,7 @@ export const FraseDoDiaContainerMobile = styled.div`
     height:5vh;
     margin-top:12vh;
     display: none;
-    @media screen and (max-width: 1280px){
+    @media screen and (max-width: 1280px), screen and (max-height: 720px) {
         display:flex;
     }
 `;

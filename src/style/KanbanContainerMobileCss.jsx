@@ -88,7 +88,7 @@ export const KanbanContainer = styled.div`
     width: 100vw;
     height: 100vh;
     display: none;
-    @media screen and (max-width: 1280px){
+    @media screen and (max-width: 1280px), screen and (max-height: 720px) {
         display: flex;
         flex-direction:column;
     }

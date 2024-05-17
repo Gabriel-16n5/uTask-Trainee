@@ -76,7 +76,7 @@ export const KanbanContainer = styled.div`
     align-items: center;
     width: 100vw;
     height: 100vh;
-    @media screen and (max-width: 1280px){
+    @media screen and (max-width: 1280px), screen and (max-height: 720px) {
         display:none;
     }
 `;
